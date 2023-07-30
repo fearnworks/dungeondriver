@@ -1,4 +1,4 @@
-from main import embed_FAISS_from_documents, load, split
+from local_loader import load, split
 import pytest
 import os
 import shutil
