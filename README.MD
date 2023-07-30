@@ -1,6 +1,6 @@
 # DungeonDriver: Unleash the Ultimate Gaming Experience 🎲🐉
 
-![image](https://user-images.githubusercontent.com/120260158/229954809-0234a060-e756-4272-9129-2b15e33d242f.png)
+![image](https://github.com/fearnworks/dungeondriver/blob/main/DungeonDriverBanner.jpg)
 
 
 Welcome to DungeonDriver, your must-have companion for a truly immersive gaming adventure! Whether you're exploring perilous dungeons, battling mighty dragons, or embarking on an epic quest, DungeonDriver takes your gaming parties to the next level. Our platform is powered by cutting-edge AI and data engineering, allowing you to dive into a world of personalized experiences, dynamic interactions, and magical moments.
