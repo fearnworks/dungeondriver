@@ -1,9 +1,9 @@
-# DungeonDriver: Unleash the Ultimate Gaming Experience 🎲🐉
+# DungeonDriver: Your Dungeon Diving Companion
 
 ![image](https://github.com/fearnworks/dungeondriver/blob/main/DungeonDriverBanner.jpg)
 
 
-Welcome to DungeonDriver, your must-have companion for a truly immersive gaming adventure! Whether you're exploring perilous dungeons, battling mighty dragons, or embarking on an epic quest, DungeonDriver takes your gaming parties to the next level. Our platform is powered by cutting-edge AI and data engineering, allowing you to dive into a world of personalized experiences, dynamic interactions, and magical moments.
+Welcome to DungeonDriver, your must-have companion for a truly immersive gaming adventure! Whether you're exploring perilous dungeons, battling mighty dragons, or embarking on an epic quest, DungeonDriver takes your gaming parties to the next level. Our goal is to build a dynamic set of tools allowing you to dive into a world of personalized experiences, dynamic interactions, and magical moments. All capable of being hosted from your very own hardware
 
 Are you ready to enhance your tabletop escapades and redefine how you play? With DungeonDriver, you're not just a player—you're a legendary hero on a grand journey. Gather your party, embark on unforgettable stories, and let DungeonDriver be the trusted companion that guides you every step of the way. Get ready to level up your gaming experience like never before!
 
@@ -16,9 +16,11 @@ Are you ready to enhance your tabletop escapades and redefine how you play? With
 
 ## 🚀 Getting Started
 
-1. [Download] #LINK the latest release of DungeonDriver.
-2. Follow our [Setup Guide](https://dungeondriver.com/setup) to configure DungeonDriver and connect to your devices.
-3. Choose from a variety of game modules and embark on your first adventure!
+```bash
+git clone https://github.com/fearnworks/dungeondriver 
+cd dungeondriver
+docker-compose up --build
+```
 
 ## 💡 Contributing
 
@@ -30,8 +32,5 @@ We welcome contributions to DungeonDriver! Follow the [Contributing Guidelines](
 
 ## 📬 Contact
 
-Got questions or feedback? Feel free to reach out to us:
+Got questions or feedback? Feel free to reach out to us here on github! 
 
-- Email: dungeondriver@fearmworks.com
-- Twitter: [@DungeonDriver](https://twitter.com/DungeonDriver)
-- Discord: [DungeonDriver Community](https://discord.gg/example)
