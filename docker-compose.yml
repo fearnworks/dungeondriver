@@ -7,7 +7,7 @@ services:
       dockerfile: ./ai_driver/Dockerfile
     container_name: ai_driver
     ports:
-      - 8010:8010
+      - 28010:28010
     volumes:
       - .:/code
       - ~/.cache/huggingface:/home/appuser/.cache/huggingface
@@ -18,3 +18,12 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+  dungeon_driver:
+    build: 
+      context: ./
+      dockerfile: ./dungeon_driver/Dockerfile
+    container_name: dungeon_driver
+    ports:
+      - 18010:18010
+    volumes:
+      - .:/code
