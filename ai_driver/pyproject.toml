@@ -36,7 +36,8 @@ dependencies = [
   "scipy",
   "sentence_transformers>=2.2.0",
   "rich",
-  "PyPDF2"
+  "PyPDF2",
+  "pinecone-client[grpc]"
 ]
 
 [tool.pytest.ini_options]
