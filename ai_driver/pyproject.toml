@@ -1,0 +1,62 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+  "setuptools>=68.0",
+  "setuptools-scm",
+  "pytest",
+]
+
+[project]
+description = "AIDriver"
+name = "aidriver"
+version = "0.1"
+dependencies = [
+    "requests",
+  "python-dotenv",
+  "pandas~=2.0.0",
+  "pyarrow==12.0.0",
+  "debugpy",
+  "loguru",
+  "httpx",
+  "python-dotenv",
+  "anyio",
+  "openai",
+  "faiss-cpu",
+  "langchain",
+  "langsmith",
+  "pypdf",
+  "InstructorEmbedding",
+  "torch",
+  "tdqm",
+  "transformers==4.20.0",
+  "datasets>=2.2.0",
+  "jsonlines",
+  "numpy",
+  "scikit_learn>=1.0.2",
+  "scipy",
+  "sentence_transformers>=2.2.0",
+  "rich",
+  "PyPDF2"
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "ai_driver",
+]
+
+[tool.setuptools.packages.find]
+include = ["ai_driver"]  # package names should match these glob patterns (["*"] by default)
+exclude = ["data"]  # exclude packages matching these glob patterns (empty by default)
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "trio",
+    "pytest-httpx",
+]
+dev = [
+    "ipykernel",
+    "mypy >= 1.0.1",
+    "black",
+    "pre-commit",
+]
