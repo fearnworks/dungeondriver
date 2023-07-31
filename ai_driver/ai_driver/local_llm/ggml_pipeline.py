@@ -52,7 +52,7 @@ def get_default_qa_config():
         cfg = box.Box(yaml.safe_load(ymlfile))
         config = QADBConfig(
             db_path=cfg.DB_PATH,
-            embed_model=cfg.EMBED_MODEL_CONFIG,
+            embed_model=cfg.CHAT_EMBED_MODEL,
             return_source=cfg.RETURN_SOURCE_DOCUMENTS,
             vector_count=cfg.VECTOR_COUNT,
         )

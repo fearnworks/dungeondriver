@@ -23,7 +23,7 @@ def run_db_build():
     texts = text_splitter.split_documents(documents)
 
     embeddings = HuggingFaceEmbeddings(
-        model_name=cfg.EMBED_MODEL_CONFIG,
+        model_name=cfg.CHAT_EMBED_MODEL,
         model_kwargs={"device": "cpu"},
     )
 

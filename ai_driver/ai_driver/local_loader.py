@@ -40,7 +40,8 @@ def split(documents: Iterable[Document], chunk_size, chunk_overlap) -> List[Docu
 
 
 def get_default_local_download() -> List[Document]:
-    dir_path = "/app/ai_driver/data"
+    """Default document list for local download"""
+    dir_path = "data"
     glob_pattern = "./*.pdf"
 
     chunks = load(dir_path, glob_pattern)
