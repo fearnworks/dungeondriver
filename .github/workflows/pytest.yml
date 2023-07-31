@@ -6,17 +6,24 @@ name: Python application
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - .pre-commit-config.yml
+      - 'ai_driver/ai_driver'
+      - 'dungeon_driver/dungeon_driver'
   pull_request:
     branches: [ "main" ]
+    paths:  
+      - .pre-commit-config.yml
+      - 'ai_driver/ai_driver'
+      - 'dungeon_driver/dungeon_driver'
+    
 
 permissions:
   contents: read
 
 jobs:
   ai_driver_test:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
@@ -37,6 +44,8 @@ jobs:
     - name: Test with pytest
       run: |
         pytest ./ai_driver
+    - name: Run Pre Commit
+      run: pre-commit
         
   dungeon_driver_test:
 
