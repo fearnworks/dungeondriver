@@ -16,6 +16,5 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 LANGCHAIN_API_KEY=
 LANGCHAIN_PROJECT=
 
-# Online Search 
+# Online Search
 SERPAPI_API_KEY=
-

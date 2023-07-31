@@ -5,33 +5,58 @@ from typing import Dict, List, Optional
 from loguru import logger
 from dataclasses import dataclass
 
+
 @dataclass
 class ReplacementConfig:
     target: str
     caster: str
 
 
-
-
 SURGE_TABLE = {}
 
+
 class SpellSurgeGenerator:
-    default_classes : List[str] = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk", "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard"]
-    default_races : List[str] = ["Human", "Elf", "Dwarf", "Halfling", "Gnome", "Half-Elf", "Half-Orc", "Tiefling", "Dragonborn"]
-    
+    default_classes: List[str] = [
+        "Barbarian",
+        "Bard",
+        "Cleric",
+        "Druid",
+        "Fighter",
+        "Monk",
+        "Paladin",
+        "Ranger",
+        "Rogue",
+        "Sorcerer",
+        "Warlock",
+        "Wizard",
+    ]
+    default_races: List[str] = [
+        "Human",
+        "Elf",
+        "Dwarf",
+        "Halfling",
+        "Gnome",
+        "Half-Elf",
+        "Half-Orc",
+        "Tiefling",
+        "Dragonborn",
+    ]
+
     def __init__(self, classes: List[str] = None, races: List[str] = None):
         if classes is None:
             self.classes = self.default_classes
         else:
             self.classes = classes
-            
+
         if races is None:
             self.races = self.default_races
         else:
             self.races = races
-    
+
     # Function for getting a random spell effect
-    def generate(self, spell_effects : Dict[str,str] = None, config: ReplacementConfig = None):
+    def generate(
+        self, spell_effects: Dict[str, str] = None, config: ReplacementConfig = None
+    ):
         """Gets a random spell effect from the spell effects table.
 
         Args:
@@ -42,15 +67,17 @@ class SpellSurgeGenerator:
         """
         if spell_effects is None:
             spell_effects = SURGE_TABLE
-        else: 
+        else:
             spell_effects = spell_effects
-            
+
         random_key = random.choice(list(spell_effects.keys()))
         random_spell_effect = spell_effects[random_key]
         random_spell_effect = self.roll_dice_in_string(random_spell_effect)
-        random_spell_effect = self.generate_subject_replacement(random_spell_effect, config)
+        random_spell_effect = self.generate_subject_replacement(
+            random_spell_effect, config
+        )
         return random_spell_effect
-    
+
     def roll_dice_in_string(self, s: str) -> str:
         """
         Replaces any dice rolls in the input string with the result of the roll.
@@ -65,21 +92,23 @@ class SpellSurgeGenerator:
         dice_rolls = re.findall(r"\d+d\d+", s)
         for roll in dice_rolls:
             # Split the dice roll into number of dice and sides
-            num_dice, num_sides = map(int, roll.split('d'))
+            num_dice, num_sides = map(int, roll.split("d"))
             # Simulate the dice roll
             total = sum(random.randint(1, num_sides) for _ in range(num_dice))
             print(f"Rolled {roll}: {total}")
             # Replace the dice roll in the string with the result
             s = s.replace(roll, str(total), 1)
         return s
-    
-    def build_config(self, target: str, caster:str) -> ReplacementConfig:
+
+    def build_config(self, target: str, caster: str) -> ReplacementConfig:
         config = ReplacementConfig(target=target, caster=caster)
         return config
 
-    def generate_subject_replacement(self, prompt: str, config: Optional[ReplacementConfig] = None):
+    def generate_subject_replacement(
+        self, prompt: str, config: Optional[ReplacementConfig] = None
+    ):
         """
-        This function takes a prompt string and creates a natural language command 
+        This function takes a prompt string and creates a natural language command
         to replace the entities of the prompt.
 
         Args:
@@ -94,17 +123,17 @@ class SpellSurgeGenerator:
         # Map of entities in the initial prompt to their replacements
         if config is None:
             replacement_map = {
-                "caster" : random.choice(self.races) + " " + random.choice(self.classes),
-                "Caster" : random.choice(self.races) + " " + random.choice(self.classes),
-                "target" : random.choice(self.races) + " " + random.choice(self.classes),
-                "Target" : random.choice(self.races) + " " + random.choice(self.classes),
+                "caster": random.choice(self.races) + " " + random.choice(self.classes),
+                "Caster": random.choice(self.races) + " " + random.choice(self.classes),
+                "target": random.choice(self.races) + " " + random.choice(self.classes),
+                "Target": random.choice(self.races) + " " + random.choice(self.classes),
             }
         else:
             replacement_map = {
                 "caster": config.caster,
                 "Caster": config.caster,
                 "target": config.target,
-                "Target": config.target
+                "Target": config.target,
             }
 
         # Replace the entities in the initial prompt
@@ -114,7 +143,7 @@ class SpellSurgeGenerator:
         # Log the command string
         logger.info("generate_subject_replacement() - command_str: " + prompt)
 
-        return prompt 
+        return prompt
 
 
 SURGE_TABLE = {
@@ -10117,6 +10146,5 @@ SURGE_TABLE = {
     "9997": "While in this area, no one can inflict or suffer any injury ",
     "9998": "While in this area, no one can speak of anything outside the area ",
     "9999": "While in this area, no one can speak to anyone else in the area ",
-    "10000": "The Stars Explode!"    
+    "10000": "The Stars Explode!",
 }
-

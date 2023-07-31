@@ -17,7 +17,7 @@ Are you ready to enhance your tabletop escapades and redefine how you play? With
 ## 🚀 Getting Started
 
 ```bash
-git clone https://github.com/fearnworks/dungeondriver 
+git clone https://github.com/fearnworks/dungeondriver
 cd dungeondriver
 docker-compose up --build
 ```
@@ -32,5 +32,4 @@ We welcome contributions to DungeonDriver! Follow the [Contributing Guidelines](
 
 ## 📬 Contact
 
-Got questions or feedback? Feel free to reach out to us here on github! 
-
+Got questions or feedback? Feel free to reach out to us here on github!

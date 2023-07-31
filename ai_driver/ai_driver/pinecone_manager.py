@@ -1,12 +1,13 @@
 import os
 from langchain.vectorstores import Chroma, Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
-import pinecone 
+import pinecone
 
-OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
-PINECONE_API_KEY = os.environ.get('PINECONE_API_KEY')
-PINECONE_API_ENV = os.environ.get('PINECONE_API_ENV') 
+PINECONE_API_KEY = os.environ.get("PINECONE_API_KEY")
+PINECONE_API_ENV = os.environ.get("PINECONE_API_ENV")
+
 
 class PineconeSessionManager:
     """
@@ -18,6 +19,7 @@ class PineconeSessionManager:
         index (pinecone.GRPCIndex): The Pinecone index object.
         docsearch (Pinecone): The Pinecone search object.
     """
+
     def __init__(self, embeddings, index_name):
         """
         Initializes a new PineconeSessionManager instance.
@@ -31,13 +33,16 @@ class PineconeSessionManager:
         # initialize pinecone
         pinecone.init(
             api_key=PINECONE_API_KEY,  # find at app.pinecone.io
-            environment=PINECONE_API_ENV  # next to api key in console
+            environment=PINECONE_API_ENV,  # next to api key in console
         )
 
         if index_name not in pinecone.list_indexes():
             raise ValueError(f"Index {index_name} not found")
         self.index = pinecone.GRPCIndex(index_name)
-        self.docsearch: Pinecone = Pinecone.from_existing_index(index_name=index_name, embedding=embeddings)
+        self.docsearch: Pinecone = Pinecone.from_existing_index(
+            index_name=index_name, embedding=embeddings
+        )
+
 
 def get_default_pinecone_session(index_name: str) -> PineconeSessionManager:
     """

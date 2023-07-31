@@ -1,5 +1,6 @@
 from dungeon_driver.spell_surge_generator import SpellSurgeGenerator, ReplacementConfig
 
+
 def test_generate_subject_replacement():
     # Given
     prompt = "The caster casts a spell on the target."
@@ -12,6 +13,7 @@ def test_generate_subject_replacement():
     # Then
     assert output == "The Human Mage casts a spell on the Orc Warrior."
 
+
 def test_roll_dice_in_string():
     # Given
     s = "The caster rolls 2d6 for damage."
@@ -23,4 +25,3 @@ def test_roll_dice_in_string():
     # Then
     assert "2d6" not in output
     assert isinstance(output, str)
-

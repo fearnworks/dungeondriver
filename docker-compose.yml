@@ -2,7 +2,7 @@ version: "3"
 
 services:
   ai_driver:
-    build: 
+    build:
       context: ./
       dockerfile: ./ai_driver/Dockerfile
     container_name: ai_driver
@@ -21,7 +21,7 @@ services:
     env_file:
       - .env
   dungeon_driver:
-    build: 
+    build:
       context: ./
       dockerfile: ./dungeon_driver/Dockerfile
     container_name: dungeon_driver

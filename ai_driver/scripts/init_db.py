@@ -7,27 +7,29 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from loguru import logger
 
 # Import config vars
-with open('config/config.yml', 'r', encoding='utf8') as ymlfile:
+with open("config/config.yml", "r", encoding="utf8") as ymlfile:
     logger.info("Loading config")
     cfg = box.Box(yaml.safe_load(ymlfile))
     logger.info(cfg)
 
+
 # Build vector database
 def run_db_build():
-    loader = DirectoryLoader(cfg.DATA_PATH,
-                             glob='*.pdf',
-                             loader_cls=PyPDFLoader)
+    loader = DirectoryLoader(cfg.DATA_PATH, glob="*.pdf", loader_cls=PyPDFLoader)
     documents = loader.load()
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=cfg.CHUNK_SIZE,
-                                                   chunk_overlap=cfg.CHUNK_OVERLAP)
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=cfg.CHUNK_SIZE, chunk_overlap=cfg.CHUNK_OVERLAP
+    )
     texts = text_splitter.split_documents(documents)
 
-    embeddings = HuggingFaceEmbeddings(model_name=cfg.EMBED_MODEL_CONFIG,
-                                       model_kwargs={'device': 'cpu'},
-                                       )
+    embeddings = HuggingFaceEmbeddings(
+        model_name=cfg.EMBED_MODEL_CONFIG,
+        model_kwargs={"device": "cpu"},
+    )
 
     vectorstore = FAISS.from_documents(texts, embeddings)
     vectorstore.save_local(cfg.DB_PATH)
+
 
 if __name__ == "__main__":
     run_db_build()
