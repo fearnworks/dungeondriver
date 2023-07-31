@@ -2,6 +2,8 @@
 
 ![image](https://github.com/fearnworks/dungeondriver/blob/main/DungeonDriverBanner.jpg)
 
+[![PyPi Publish](https://github.com/fearnworks/dungeondriver/actions/workflows/python-publish.yml/badge.svg)](https://github.com/fearnworks/dungeondriver/actions/workflows/python-publish.yml)
+[![Tests & Linting](https://github.com/fearnworks/dungeondriver/actions/workflows/pytest.yml/badge.svg)](https://github.com/fearnworks/dungeondriver/actions/workflows/pytest.yml)
 
 Welcome to DungeonDriver, your must-have companion for a truly immersive gaming adventure! Whether you're exploring perilous dungeons, battling mighty dragons, or embarking on an epic quest, DungeonDriver takes your gaming parties to the next level. Our goal is to build a dynamic set of tools allowing you to dive into a world of personalized experiences, dynamic interactions, and magical moments. All capable of being hosted from your very own hardware
 
