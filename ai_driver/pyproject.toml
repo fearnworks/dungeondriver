@@ -9,7 +9,7 @@ requires = [
 [project]
 description = "AIDriver"
 name = "aidriver"
-version = "0.1"
+version = "0.1.1"
 dependencies = [
     "requests",
   "python-dotenv",
@@ -50,8 +50,8 @@ pythonpath = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["ai_driver"]  # package names should match these glob patterns (["*"] by default)
-exclude = ["data"]  # exclude packages matching these glob patterns (empty by default)
+include = ["ai_driver", "ai_driver.*", "config"]  # package names should match these glob patterns (["*"] by default)
+exclude = ["data", "vectorstore", "artifacts"]  # exclude packages matching these glob patterns (empty by default)
 
 [project.optional-dependencies]
 test = [
