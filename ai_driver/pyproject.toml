@@ -8,6 +8,8 @@ requires = [
 
 [project]
 description = "AIDriver"
+long_description = "file: README.md"
+long_description_content_type = "text/markdown"
 name = "aidriver"
 version = "0.1.1"
 dependencies = [
