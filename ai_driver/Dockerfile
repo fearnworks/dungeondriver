@@ -10,7 +10,9 @@ RUN python3 -m pip install --upgrade pip
 RUN groupadd -r appuser && useradd --no-log-init -r -g appuser appuser
 
 # Create app directory and change ownership to appuser
-RUN mkdir /app && chown appuser:appuser /app
+RUN mkdir /app && \
+    mkdir -p /home/appuser/.cache && \
+    chown -R appuser:appuser /app /home/appuser
 
 # Set working directory to /app
 WORKDIR /app
@@ -19,8 +21,8 @@ COPY ./ai_driver /app/ai_driver
 RUN python3 -m pip install -e /app/ai_driver
 
 # Change ownership of /app to appuser
-RUN chown -R appuser:appuser /app
+RUN chown -R appuser:appuser /app /home/appuser
 
 USER appuser
-
+WORKDIR /app/ai_driver
 CMD ["/usr/bin/python3", "/app/ai_driver/ai_driver/main.py"]

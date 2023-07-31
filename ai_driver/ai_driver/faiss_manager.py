@@ -22,3 +22,4 @@ def embed_FAISS_from_documents(documents: Iterable[Document], embedding_model_na
 
     logger.info("Vector store created")
     return db_instructEmbedd
+
