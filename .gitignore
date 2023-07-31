@@ -29,7 +29,7 @@ venv.bak/
 *.iml
 
 # Build artifacts
-
+build/
 *.class
 
 # Dependency directories
@@ -45,7 +45,7 @@ node_modules/
 
 # Packaging
 *.tar.gz
-
+dist/
 # Backup files
 *~
 *.bak
