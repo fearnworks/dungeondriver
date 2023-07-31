@@ -1,0 +1,13 @@
+RETURN_SOURCE_DOCUMENTS: True
+VECTOR_COUNT: 2
+CHUNK_SIZE: 500
+CHUNK_OVERLAP: 50
+DATA_PATH: 'data/'
+DB_PATH: 'vectorstore/db_faiss'
+# MODEL_TYPE: 'mpt'
+# MODEL_BIN_PATH: 'models/mpt-7b-instruct.ggmlv3.q8_0.bin'
+MODEL_TYPE: 'llama'
+LLM_MODEL_BIN_PATH: 'artifacts/TheBloke_Llama-2-7B-Chat-GGML/llama-2-7b-chat.ggmlv3.q8_0.bin'
+EMBED_MODEL_CONFIG: 'sentence-transformers/all-MiniLM-L6-v2'
+MAX_NEW_TOKENS: 256
+TEMPERATURE: 0.01

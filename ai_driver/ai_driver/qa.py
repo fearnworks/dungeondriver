@@ -1,5 +1,12 @@
 from loguru import logger 
 import textwrap
+from dataclasses import dataclass
+@dataclass
+class QADBConfig:
+    db_path: str
+    embed_model: str
+    return_source: str 
+    vector_count: str
 
 def wrap_text_preserve_newlines(text, width=110):
     lines = text.split('\n')

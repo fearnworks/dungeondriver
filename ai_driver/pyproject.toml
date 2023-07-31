@@ -14,7 +14,7 @@ dependencies = [
     "requests",
   "python-dotenv",
   "pandas~=2.0.0",
-  "pyarrow==12.0.0",
+  "pyarrow~=12.0.0",
   "debugpy",
   "loguru",
   "httpx",
@@ -28,16 +28,20 @@ dependencies = [
   "InstructorEmbedding",
   "torch",
   "tdqm",
-  "transformers==4.20.0",
-  "datasets>=2.2.0",
+  "transformers",
+  "datasets",
   "jsonlines",
   "numpy",
-  "scikit_learn>=1.0.2",
+  "scikit_learn",
   "scipy",
-  "sentence_transformers>=2.2.0",
+  "sentence_transformers",
   "rich",
   "PyPDF2",
-  "pinecone-client[grpc]"
+  "pinecone-client[grpc]",
+  "python-box",
+  "ctransformers",
+  "uvicorn",
+  "fastapi"
 ]
 
 [tool.pytest.ini_options]
