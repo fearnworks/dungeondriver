@@ -1,15 +1,20 @@
-from loguru import logger
-from vector_storage.pinecone_manager import get_default_pinecone_session, PineconeConfig
-from langsmith_config import get_default_langsmith_client
-from vector_storage.faiss_manager import embed_FAISS_from_documents
-from local_loader import get_default_local_download
-from qa import query_documents
-from instruct import get_instruct_config, InstructConfig
-from langchain.llms import OpenAI
-from langchain.chains import RetrievalQA
 import os
 import timeit
-from local_llm.ggml_pipeline import setup_local_qa_db, get_default_qa_config
+from loguru import logger
+from langchain.llms import OpenAI
+from langchain.chains import RetrievalQA
+
+
+from ai_driver.vector_storage.pinecone_manager import (
+    get_default_pinecone_session,
+    PineconeConfig,
+)
+from ai_driver.langsmith_config import get_default_langsmith_client
+from ai_driver.vector_storage.faiss_manager import embed_FAISS_from_documents
+from ai_driver.local_loader import get_default_local_download
+from ai_driver.qa import query_documents
+from ai_driver.instruct import get_instruct_config, InstructConfig
+from ai_driver.local_llm.ggml_pipeline import setup_local_qa_db, get_default_qa_config
 
 
 def pinecone_pipeline():
@@ -32,7 +37,6 @@ def pinecone_pipeline():
         verbose=True,
         return_source_documents=True,
     )
-
     query_documents(qa_chain, "How do saving throws work?")
 
 

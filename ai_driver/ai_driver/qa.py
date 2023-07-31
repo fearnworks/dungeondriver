@@ -1,6 +1,7 @@
-from loguru import logger
 import textwrap
 from dataclasses import dataclass
+
+from loguru import logger
 
 
 @dataclass

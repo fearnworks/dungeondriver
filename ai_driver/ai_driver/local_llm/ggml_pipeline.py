@@ -5,10 +5,9 @@ from langchain import PromptTemplate
 from langchain.chains import RetrievalQA
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
-from local_llm.prompts import qa_template
-from local_llm.ggml_llm import build_ggml_llm, get_default_ggml_config
-
-from qa import QADBConfig
+from ai_driver.local_llm.prompts import qa_template
+from ai_driver.local_llm.ggml_llm import build_ggml_llm, get_default_ggml_config
+from ai_driver.qa import QADBConfig
 
 
 def set_qa_prompt():

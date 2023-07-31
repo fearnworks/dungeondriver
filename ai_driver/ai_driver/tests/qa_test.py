@@ -1,5 +1,5 @@
 import textwrap
-from qa import wrap_text_preserve_newlines
+from ai_driver.qa import wrap_text_preserve_newlines
 
 
 def test_wrap_text_preserve_newlines():
