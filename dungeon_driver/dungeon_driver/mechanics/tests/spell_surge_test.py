@@ -1,4 +1,7 @@
-from dungeon_driver.spell_surge_generator import SpellSurgeGenerator, ReplacementConfig
+from dungeon_driver.mechanics.spell_surge_generator import (
+    SpellSurgeGenerator,
+    ReplacementConfig,
+)
 
 
 def test_generate_subject_replacement():

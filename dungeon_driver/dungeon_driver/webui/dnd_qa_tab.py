@@ -1,4 +1,3 @@
-from dungeon_driver.spell_surge_generator import SpellSurgeGenerator
 import gradio as gr
 import httpx
 from loguru import logger
@@ -27,20 +26,8 @@ async def make_request(prompt, endpoint):
         return response
 
 
-###########################
-def generate_random_event():
-    """
-    Generates a random event string using SpellSurgeGenerator.
-
-    Returns:
-        str: A random event string.
-    """
-    ssg = SpellSurgeGenerator()
-    return ssg.generate()
-
-
-def create_spell_surge_generator():
-    with gr.Blocks() as demo:
+def create_dnd_qa() -> gr.Blocks:
+    with gr.Blocks() as question_tab:
         with gr.Row():
             with gr.Column():
                 prompt = gr.Textbox(label="Enter a prompt")
@@ -56,5 +43,4 @@ def create_spell_surge_generator():
         generate_button.click(
             fn=endpoint_test, inputs=[prompt], outputs=[response1, response2]
         )
-        ssg_btn = gr.Button("Generate Spell Surge")
-        ssg_btn.click(fn=generate_random_event, outputs=prompt)
+    return question_tab
