@@ -29,3 +29,4 @@ def process_llm_response(llm_response):
 def query_documents(qa_chain, query):
     llm_response = qa_chain(query)
     process_llm_response(llm_response)
+    return llm_response

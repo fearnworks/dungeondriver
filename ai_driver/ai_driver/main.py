@@ -16,11 +16,7 @@ from sqlalchemy.orm import Session
 from ai_driver.server.api import deps
 from ai_driver.server.api.api_v1.api import api_router
 from ai_driver.server.core.config import settings, setup_app_logging
-from ai_driver.pipelines import (
-    pinecone_pipeline,
-    local_llm_pipeline,
-    local_download_pipeline,
-)
+
 
 load_dotenv(find_dotenv())
 
@@ -129,21 +125,6 @@ async def add_process_time_header(request: Request, call_next):
     process_time = time.time() - start_time
     response.headers["X-Process-Time"] = str(process_time)
     return response
-
-
-@app.get("/local_download_pipline")
-async def local_endpoint():
-    await local_download_pipeline()
-
-
-@app.get("/pinecone_test")
-async def pinecone_endpoint():
-    await pinecone_pipeline()
-
-
-@app.get("/local_llm_pipline")
-async def local_llm_endpoint():
-    await local_llm_pipeline()
 
 
 # Include the routers
