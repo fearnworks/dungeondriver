@@ -31,7 +31,7 @@ services:
       dockerfile: Dockerfile
     container_name: dungeon_driver
     ports:
-      - 18010:18010
+      - 18001:18001
     volumes:
       - ./dungeon_driver/dungeon_driver:/code
     env_file:
