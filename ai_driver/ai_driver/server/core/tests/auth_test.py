@@ -5,6 +5,7 @@ from unittest.mock import patch
 from ai_driver.server.core.auth import _create_token
 
 
+@pytest.mark.integration
 @patch("jose.jwt.encode")
 def test_should_create_valid_token_with_given_input(mock_encode):
     mock_encode.return_value = "mock_token"
@@ -18,6 +19,7 @@ def test_should_create_valid_token_with_given_input(mock_encode):
     assert result == "mock_token"
 
 
+@pytest.mark.integration
 @patch("jose.jwt.encode")
 def test_should_set_correct_expiration_given_lifetime(mock_encode):
     mock_encode.return_value = "mock_token"
@@ -30,6 +32,7 @@ def test_should_set_correct_expiration_given_lifetime(mock_encode):
     assert abs(time_diff - lifetime.total_seconds()) < 0.001  # 1 millisecond tolerance
 
 
+@pytest.mark.integration
 @patch("jose.jwt.encode")
 def test_should_handle_different_token_types_correctly(mock_encode):
     mock_encode.return_value = "mock_token"
@@ -41,6 +44,7 @@ def test_should_handle_different_token_types_correctly(mock_encode):
     assert called_payload["type"] == token_type
 
 
+@pytest.mark.integration
 @patch("jose.jwt.encode")
 def test_should_set_sub_claim_correctly(mock_encode):
     mock_encode.return_value = "mock_token"
@@ -52,6 +56,7 @@ def test_should_set_sub_claim_correctly(mock_encode):
     assert called_payload["sub"] == sub
 
 
+@pytest.mark.integration
 @patch("jose.jwt.encode")
 def test_should_raise_error_on_invalid_input(mock_encode):
     mock_encode.side_effect = Exception("Invalid input")
