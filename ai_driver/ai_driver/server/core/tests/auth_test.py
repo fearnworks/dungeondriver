@@ -2,12 +2,12 @@ import pytest
 from datetime import datetime, timedelta
 from unittest.mock import patch
 
-from ai_driver.server.core.auth import _create_token
-
 
 @pytest.mark.integration
 @patch("jose.jwt.encode")
 def test_should_create_valid_token_with_given_input(mock_encode):
+    from ai_driver.server.core.auth import _create_token
+
     mock_encode.return_value = "mock_token"
     token_type = "access"
     lifetime = timedelta(minutes=15)
@@ -22,6 +22,8 @@ def test_should_create_valid_token_with_given_input(mock_encode):
 @pytest.mark.integration
 @patch("jose.jwt.encode")
 def test_should_set_correct_expiration_given_lifetime(mock_encode):
+    from ai_driver.server.core.auth import _create_token
+
     mock_encode.return_value = "mock_token"
     token_type = "access"
     lifetime = timedelta(minutes=15)
@@ -35,6 +37,8 @@ def test_should_set_correct_expiration_given_lifetime(mock_encode):
 @pytest.mark.integration
 @patch("jose.jwt.encode")
 def test_should_handle_different_token_types_correctly(mock_encode):
+    from ai_driver.server.core.auth import _create_token
+
     mock_encode.return_value = "mock_token"
     token_type = "refresh"
     lifetime = timedelta(minutes=15)
@@ -47,6 +51,8 @@ def test_should_handle_different_token_types_correctly(mock_encode):
 @pytest.mark.integration
 @patch("jose.jwt.encode")
 def test_should_set_sub_claim_correctly(mock_encode):
+    from ai_driver.server.core.auth import _create_token
+
     mock_encode.return_value = "mock_token"
     token_type = "access"
     lifetime = timedelta(minutes=15)
@@ -59,6 +65,8 @@ def test_should_set_sub_claim_correctly(mock_encode):
 @pytest.mark.integration
 @patch("jose.jwt.encode")
 def test_should_raise_error_on_invalid_input(mock_encode):
+    from ai_driver.server.core.auth import _create_token
+
     mock_encode.side_effect = Exception("Invalid input")
     token_type = "access"
     lifetime = timedelta(minutes=15)
