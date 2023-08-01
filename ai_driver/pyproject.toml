@@ -65,3 +65,18 @@ dev = [
     "black",
     "pre-commit",
 ]
+server = [
+    'uvicorn',
+    'fastapi',
+    'jose',
+    "python-multipart",
+    "pydantic[email]",
+    "Jinja2",
+    "SQLAlchemy",
+    "alembic",
+    "gunicorn",
+    "passlib",
+    "python-jose",
+    "tenacity"
+
+]
