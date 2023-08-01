@@ -41,7 +41,7 @@ def split(documents: Iterable[Document], chunk_size, chunk_overlap) -> List[Docu
 
 def get_default_local_download() -> List[Document]:
     """Default document list for local download"""
-    dir_path = "data"
+    dir_path = "/data"  # TODO convert to config
     glob_pattern = "./*.pdf"
 
     chunks = load(dir_path, glob_pattern)

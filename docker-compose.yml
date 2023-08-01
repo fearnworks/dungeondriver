@@ -11,6 +11,8 @@ services:
     volumes:
       - ./ai_driver/ai_driver:/code
       - ./artifacts:/artifacts
+      - ./vectorstore:/vectorstore
+      - ./data:/data
       # - ~/.cache/huggingface:/home/appuser/.cache/huggingface
     deploy:
       resources:

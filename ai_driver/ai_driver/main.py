@@ -22,6 +22,8 @@ from ai_driver.pipelines import (
     local_download_pipeline,
 )
 
+load_dotenv(find_dotenv())
+
 # Define the base path of this script
 BASE_PATH = Path(__file__).resolve().parent
 
@@ -129,6 +131,21 @@ async def add_process_time_header(request: Request, call_next):
     return response
 
 
+@app.get("/local_download_pipline")
+async def local_endpoint():
+    await local_download_pipeline()
+
+
+@app.get("/pinecone_test")
+async def pinecone_endpoint():
+    await pinecone_pipeline()
+
+
+@app.get("/local_llm_pipline")
+async def local_llm_endpoint():
+    await local_llm_pipeline()
+
+
 # Include the routers
 app.include_router(api_router, prefix=settings.API_V1_STR)
 app.include_router(root_router)
@@ -141,16 +158,3 @@ if __name__ == "__main__":
 
     logger.info("Starting uvicorn")
     uvicorn.run(app, host="0.0.0.0", port=28001, log_level="debug")
-
-load_dotenv(find_dotenv())
-
-
-def run_default_pipelines():
-    pinecone_pipeline()
-    local_llm_pipeline()
-    local_download_pipeline()
-
-
-####
-if __name__ == "__main__":
-    run_default_pipelines()

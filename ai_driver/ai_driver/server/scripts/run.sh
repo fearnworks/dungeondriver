@@ -20,4 +20,4 @@ export ACCESSLOG="-"  # '-' means log to stdout
 export ERRORLOG="-"  # '-' means log to stderr
 export LOGLEVEL="info"  # Set log level to info
 # Run gunicorn
-exec gunicorn --bind $HOST:$PORT "$APP_MODULE" -k uvicorn.workers.UvicornWorker --access-logfile $ACCESSLOG --error-logfile $ERRORLOG --log-level $LOGLEVEL
+exec gunicorn --bind $HOST:$PORT "$APP_MODULE" -k uvicorn.workers.UvicornWorker --access-logfile $ACCESSLOG --error-logfile $ERRORLOG --log-level $LOGLEVEL --timeout $TIMEOUT

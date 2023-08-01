@@ -37,3 +37,4 @@ BACKEND_CORS_ORIGINS="[\"http://localhost:3000\",\"http://localhost:8001\"]"
 BACKEND_CORS_ORIGIN_REGEX=http://theeventualproductionhost.xyz
 FIRST_SUPERUSER=admin@api.com
 FIRST_SUPERUSER_PW=CHANGEME
+TIMEOUT = 600
