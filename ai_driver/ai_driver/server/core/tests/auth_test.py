@@ -1,10 +1,7 @@
 import pytest
 from datetime import datetime, timedelta
 from unittest.mock import patch
-import jose
 
-# Assuming settings is a module with auth class defined
-from ai_driver.server.core.config import settings
 from ai_driver.server.core.auth import _create_token
 
 
