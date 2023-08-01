@@ -30,7 +30,7 @@ pythonpath = [
 
 [tool.setuptools.packages.find]
 include = ["dungeon_driver"]  # package names should match these glob patterns (["*"] by default)
-exclude = ["data"]  # exclude packages matching these glob patterns (empty by default)
+exclude = []  # exclude packages matching these glob patterns (empty by default)
 
 [project.optional-dependencies]
 test = [

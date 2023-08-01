@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  ai_driver:
+  ai_driver: # ai_driver:28001
     build:
       context: ./ai_driver
       dockerfile: Dockerfile
@@ -23,10 +23,12 @@ services:
               capabilities: [gpu]
     env_file:
       - .env
+    networks:
+      - dd-network
   dungeon_driver:
     build:
       context: ./dungeon_driver
-      dockerfile: ./dungeon_driver/Dockerfile
+      dockerfile: Dockerfile
     container_name: dungeon_driver
     ports:
       - 18010:18010
@@ -34,3 +36,12 @@ services:
       - ./dungeon_driver/dungeon_driver:/code
     env_file:
       - .env
+    networks:
+      - dd-network
+    depends_on:
+      - ai_driver
+
+
+networks:
+  dd-network:
+    external: true
