@@ -31,9 +31,11 @@ def build_retrieval_qa(llm, prompt, vectordb, config: QADBConfig):
     return qa_chain
 
 
-def setup_local_qa_db(config: QADBConfig):
+def setup_local_qa_db(config: QADBConfig, device: str = "cuda"):
+    # Set device to cpu for cpu inference
+
     embeddings = HuggingFaceEmbeddings(
-        model_name=config.embed_model, model_kwargs={"device": "cpu"}
+        model_name=config.embed_model, model_kwargs={"device": device}
     )
     vectordb = FAISS.load_local(config.db_path, embeddings)
 

@@ -10,6 +10,7 @@ class GGMLConfig:
     model_type: str
     max_new_tokens: int
     temperature: float = 0.7
+    gpu_layers: int = 0
 
 
 def build_ggml_llm(config: GGMLConfig) -> CTransformers:
@@ -19,6 +20,7 @@ def build_ggml_llm(config: GGMLConfig) -> CTransformers:
         config={
             "max_new_tokens": config.max_new_tokens,
             "temperature": config.temperature,
+            "gpu_layers": config.gpu_layers,
         },
     )
     return llm
@@ -33,5 +35,6 @@ def get_default_ggml_config():
             model_type=cfg.MODEL_TYPE,
             max_new_tokens=cfg.MAX_NEW_TOKENS,
             temperature=cfg.TEMPERATURE,
+            gpu_layers=cfg.GGML_GPU_LAYERS,
         )
         return config
