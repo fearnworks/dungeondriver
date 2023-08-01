@@ -1,1 +1,7 @@
-ai_driver/artifacts/TheBloke_MPT-7B-Instruct-GGML
+ai_driver/artifacts
+.git
+.cache
+*.md
+artifacts/
+hkunlp_instructor/
+vectorstore/

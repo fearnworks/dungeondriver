@@ -13,16 +13,20 @@ RUN groupadd -r appuser && useradd --no-log-init -r -g appuser appuser
 RUN mkdir /app && \
     mkdir -p /home/appuser/.cache && \
     chown -R appuser:appuser /app /home/appuser
-
-# Set working directory to /app
+COPY ./pyproject.toml /app/pyproject.toml
+# # Set working directory to /app
 WORKDIR /app
+RUN pip install .[server]
 
-COPY ./ai_driver /app/ai_driver
-RUN python3 -m pip install -e /app/ai_driver
+
+COPY . /app/ai_driver
+RUN python3 -m pip install -e /app/ai_driver[server]
 
 # Change ownership of /app to appuser
 RUN chown -R appuser:appuser /app /home/appuser
 
 USER appuser
 WORKDIR /app/ai_driver
-CMD ["/usr/bin/python3", "/app/ai_driver/ai_driver/main.py"]
+RUN chmod +x ./ai_driver/server/scripts/run.sh
+CMD ["./ai_driver/server/scripts/run.sh"]
+# CMD ["tail", "-f", "/dev/null"]

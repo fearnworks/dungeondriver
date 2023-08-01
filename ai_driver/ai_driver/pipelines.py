@@ -17,7 +17,7 @@ from ai_driver.instruct import get_instruct_config, InstructConfig
 from ai_driver.local_llm.ggml_pipeline import setup_local_qa_db, get_default_qa_config
 
 
-def pinecone_pipeline():
+async def pinecone_pipeline():
     """Example Pinecone Pipeline"""
     logger.info("Pinecone Pipeline")
     config = PineconeConfig(
@@ -40,7 +40,7 @@ def pinecone_pipeline():
     query_documents(qa_chain, "How do saving throws work?")
 
 
-def local_llm_pipeline():
+async def local_llm_pipeline():
     """Example Local LLM Pipeline"""
 
     query = "How do saving throws work?"
@@ -67,7 +67,7 @@ def local_llm_pipeline():
     logger.info(f"Time to retrieve response: {end - start}")
 
 
-def local_download_pipeline(config=None):
+async def local_download_pipeline(config=None):
     """Example local store pipeline"""
     logger.info("Local download pipeline: FAISS")
     texts = get_default_local_download()

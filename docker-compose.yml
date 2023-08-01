@@ -3,14 +3,17 @@ version: "3"
 services:
   ai_driver:
     build:
-      context: ./
-      dockerfile: ./ai_driver/Dockerfile
+      context: ./ai_driver
+      dockerfile: Dockerfile
     container_name: ai_driver
     ports:
-      - 28010:28010
+      - 28001:28001
     volumes:
-      - .:/code
-      - ~/.cache/huggingface:/home/appuser/.cache/huggingface
+      - ./ai_driver/ai_driver:/code
+      - ./artifacts:/artifacts
+      - ./vectorstore:/vectorstore
+      - ./data:/data
+      # - ~/.cache/huggingface:/home/appuser/.cache/huggingface
     deploy:
       resources:
         reservations:
@@ -22,12 +25,12 @@ services:
       - .env
   dungeon_driver:
     build:
-      context: ./
+      context: ./dungeon_driver
       dockerfile: ./dungeon_driver/Dockerfile
     container_name: dungeon_driver
     ports:
       - 18010:18010
     volumes:
-      - .:/code
+      - ./dungeon_driver/dungeon_driver:/code
     env_file:
       - .env
