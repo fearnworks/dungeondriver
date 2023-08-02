@@ -9,7 +9,7 @@ from loguru import logger
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from sqlalchemy.orm import Session
 import httpx
-
+from ai_driver.cloud_llm.cloud_chat_agent import CloudChatAgent
 from ai_driver.server import crud, schemas
 from ai_driver.server.api import deps
 from ai_driver.pipelines import (
@@ -47,5 +47,13 @@ def pinecone_endpoint(query: str, db: Session = Depends(deps.get_db)):
 @router.get("/local_llm/{query}", status_code=200, response_model=schemas.ChatBase)
 def local_llm_endpoint(query: str, db: Session = Depends(deps.get_db)):
     response = local_llm_pipeline(query)
+    logger.info(response)
+    return response
+
+
+@router.get("/cloudllm/{query}", status_code=200, response_model=schemas.ChatBase)
+def cloud_llm_endpoint(query: str, db: Session = Depends(deps.get_db)):
+    agent = CloudChatAgent()
+    response = agent.get_completion(query)
     logger.info(response)
     return response
