@@ -2,7 +2,7 @@ from loguru import logger
 
 
 def replace_prompt(prompt: str, replacement_map: dict) -> str:
-    logger.info(prompt)
+    logger.debug(prompt)
     for key in replacement_map.keys():
         if "{" + key + "}" not in prompt:
             logger.info(key)

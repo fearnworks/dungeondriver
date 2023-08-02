@@ -14,3 +14,7 @@ class ChatBase(BaseModel):
     query: str
     result: str
     # sources: Optional[str] = None
+
+
+class ChatRequest(BaseModel):
+    query: str

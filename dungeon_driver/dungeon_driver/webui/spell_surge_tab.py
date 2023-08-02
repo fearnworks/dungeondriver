@@ -8,9 +8,35 @@ from loguru import logger
 timeout = httpx.Timeout(600.0)
 
 
-def generate_sd_prompt(random_event: str):
+def format_evals(evals):
+    result = ""
+    for key, value in evals.items():
+        result += f"{key}:\n"
+        result += f"    Score: {value['score']}\n"
+        result += f"    Justification: {value['justification']}\n"
+    return result
+
+
+async def generate_sd_prompt(random_event: str):
     prompt = replace_prompt(OPENAI_RPG_SD_AGENT_PROMPT, {"prompt": random_event})
-    return prompt
+    response = await make_request(prompt, "prompt")
+    logger.info(response.json())
+    gen_prompt = response.json()["prompt"]
+    evals = response.json()["evaluations"]
+    pretty_eval = format_evals(evals)
+    return gen_prompt, pretty_eval
+
+
+async def make_request(prompt, endpoint):
+    async with httpx.AsyncClient(timeout=timeout) as client:
+        logger.info(f"Making request to {endpoint}")
+        request = {"query": prompt}
+        response = await client.post(
+            f"http://ai_driver:28001/api/v1/image/{endpoint}",
+            json=request,
+        )
+        logger.info(response.text)
+        return response
 
 
 ###########################
@@ -34,12 +60,14 @@ def create_spell_surge_generator() -> gr.Blocks:
                 # temp_2 = gr.Slider(minimum=0, maximum=1.5, label="Temperature 2")
 
             with gr.Column():
-                sd_prompt = gr.Textbox(label="Pinecone / OAI Response")
-            # with gr.Column():
-            #     response2 = gr.Textbox(label="FAISS / LLaMa Response")
+                sd_prompt = gr.Textbox(label="Prompt")
+            with gr.Column():
+                sd_eval = gr.Textbox(label="Evaluations")
 
         ssg_btn = gr.Button("Generate Spell Surge")
         ssg_btn.click(fn=generate_random_event, outputs=prompt)
         img_gen_btn = gr.Button("Generate Stable Diffusion Prompt")
-        img_gen_btn.click(fn=generate_sd_prompt, inputs=prompt, outputs=sd_prompt)
+        img_gen_btn.click(
+            fn=generate_sd_prompt, inputs=prompt, outputs=[sd_prompt, sd_eval]
+        )
     return spell_surge_gen_tab

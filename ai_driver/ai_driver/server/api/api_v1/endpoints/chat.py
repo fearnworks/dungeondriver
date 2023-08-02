@@ -27,9 +27,6 @@ from ai_driver.pipelines import (
 router = APIRouter()
 
 
-chat_router = APIRouter()
-
-
 @router.get("/local_download_pipline")
 def local_endpoint(
     db: Session = Depends(deps.get_db),
@@ -51,9 +48,11 @@ def local_llm_endpoint(query: str, db: Session = Depends(deps.get_db)):
     return response
 
 
-@router.get("/cloudllm/{query}", status_code=200, response_model=schemas.ChatBase)
-def cloud_llm_endpoint(query: str, db: Session = Depends(deps.get_db)):
+@router.post("/cloudllm", status_code=200, response_model=schemas.ChatBase)
+def cloud_llm_endpoint(
+    request: schemas.ChatRequest, db: Session = Depends(deps.get_db)
+):
     agent = CloudChatAgent()
-    response = agent.get_completion(query)
+    response = agent.get_completion(request.query)
     logger.info(response)
     return response

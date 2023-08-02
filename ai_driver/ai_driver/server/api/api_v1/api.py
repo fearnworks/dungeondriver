@@ -2,7 +2,7 @@
 This module creates an API router for the FastAPI application and includes routes from the auth module.
 """
 
-from ai_driver.server.api.api_v1.endpoints import auth, chat
+from ai_driver.server.api.api_v1.endpoints import auth, chat, image
 from fastapi import APIRouter
 
 api_router = APIRouter()
@@ -19,4 +19,9 @@ The routes from the auth module will be categorized under the tag "auth" in the 
 api_router.include_router(chat.router, prefix="/chat", tags=["chat"])
 """
 Includes the routes defined in the chat module under the prefix "/chat".
+"""
+
+api_router.include_router(image.router, prefix="/image", tags=["image"])
+"""
+Includes the routes defined in the image module under the prefix "/image".
 """
