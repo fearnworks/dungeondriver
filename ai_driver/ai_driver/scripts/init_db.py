@@ -13,7 +13,7 @@ def run_db_build():
     )
     documents = loader.load()
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=server_config.CHUNK_SIZE, chunk_overlap=server_configCHUNK_OVERLAP
+        chunk_size=server_config.CHUNK_SIZE, chunk_overlap=server_config.CHUNK_OVERLAP
     )
     texts = text_splitter.split_documents(documents)
 
