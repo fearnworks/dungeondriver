@@ -17,7 +17,8 @@ ENV MPLCONFIGDIR /tmp/matplotlib
 
 COPY ./pyproject.toml /app/pyproject.toml
 # Set working directory to /app
-RUN pip install /app
+RUN --mount=type=cache,target=~/.cache/pip \
+    pip install /app
 
 COPY . /app/dungeon_driver
 WORKDIR /app/dungeon_driver

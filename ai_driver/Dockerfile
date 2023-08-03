@@ -16,7 +16,8 @@ RUN mkdir /app && \
 COPY ./pyproject.toml /app/pyproject.toml
 # # Set working directory to /app
 WORKDIR /app
-RUN pip install .[server]
+RUN --mount=type=cache,target=~/.cache/pip \
+    pip install .[server]
 
 
 COPY . /app/ai_driver
