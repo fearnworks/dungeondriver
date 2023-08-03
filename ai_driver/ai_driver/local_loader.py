@@ -47,11 +47,10 @@ def split(documents: Iterable[Document], chunk_size, chunk_overlap) -> List[Docu
     return texts
 
 
-def local_download_pipeline(config=None):
+def local_download_pipeline(dir_path: str):
     """Example local store pipeline"""
 
     logger.info("Local download pipeline: FAISS")
-    dir_path = server_config.DATA_PATH
     texts = get_default_local_download(dir_path=dir_path)
     config: InstructConfig = get_instruct_config()
 

@@ -12,6 +12,7 @@ from ai_driver.server import crud, schemas
 from ai_driver.server.api import deps
 from ai_driver.local_loader import local_download_pipeline
 from ai_driver.cloud_llm.cloud_qa import pinecone_qa_pipeline
+from ai_driver.config import server_config
 
 router = APIRouter()
 
@@ -20,21 +21,23 @@ router = APIRouter()
 def local_endpoint(
     db: Session = Depends(deps.get_db),
 ):
-    local_download_pipeline()
+    local_download_pipeline(dir_path=server_config.DATA_PATH)
 
 
-@router.get("/pinecone/{query}", status_code=200, response_model=schemas.ChatBase)
-def pinecone_endpoint(query: str, db: Session = Depends(deps.get_db)):
-    response = pinecone_qa_pipeline(query)
-    result = schemas.ChatBase(query=query, result=response)
+@router.post("/pinecone", status_code=200, response_model=schemas.ChatBase)
+def pinecone_endpoint(request: schemas.ChatRequest, db: Session = Depends(deps.get_db)):
+    response = pinecone_qa_pipeline(request.query)
+    result = schemas.ChatBase(query=request.query, result=response)
     logger.info(result)
     return result
 
 
-@router.get("/local_llm/{query}", status_code=200, response_model=schemas.ChatBase)
-def local_llm_endpoint(query: str, db: Session = Depends(deps.get_db)):
-    response = local_llm_qa_pipeline(query)
-    result = schemas.ChatBase(query=query, result=response)
+@router.post("/local_llm", status_code=200, response_model=schemas.ChatBase)
+def local_llm_endpoint(
+    request: schemas.ChatRequest, db: Session = Depends(deps.get_db)
+):
+    response = local_llm_qa_pipeline(request.query)
+    result = schemas.ChatBase(query=request.query, result=response)
     logger.info(result)
     return result
 

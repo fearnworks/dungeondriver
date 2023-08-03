@@ -9,6 +9,8 @@ timeout = httpx.Timeout(600.0)
 async def endpoint_test(prompt: str):
     response = await make_request(prompt, "pinecone")
     response2 = await make_request(prompt, "local_llm")
+    logger.info(response)
+    logger.info(response2)
     if response.status_code == 200:
         print("Server is up and running!")
     else:
@@ -19,10 +21,12 @@ async def endpoint_test(prompt: str):
 async def make_request(prompt, endpoint):
     async with httpx.AsyncClient(timeout=timeout) as client:
         logger.info(f"Making request to {endpoint} with query {prompt}")
-        response = await client.get(
-            f"http://ai_driver:28001/api/v1/chat/{endpoint}/{prompt}"
+        request = {"query": prompt}
+        response = await client.post(
+            f"http://ai_driver:28001/api/v1/chat/{endpoint}",
+            json=request,
         )
-        logger.info(response.text)
+        logger.debug(response.text)
         return response
 
 
