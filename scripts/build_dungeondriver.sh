@@ -5,13 +5,16 @@ set +o allexport
 
 cd ./dungeon_driver
 
+
 IMAGE_NAME="ghcr.io/fearnworks/dungeondriver"
 RELEASE_TAG="$IMAGE_NAME:release"
+
 GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 GIT_COMMIT=$(git rev-parse --short HEAD)
 
 # Authenticate with the GitHub Container Registry
 echo "$REG_TOKEN" | docker login ghcr.io -u USERNAME --password-stdin
+
 
 docker pull "$RELEASE_TAG" || true
 docker build -t "$IMAGE_NAME:$GIT_BRANCH" \

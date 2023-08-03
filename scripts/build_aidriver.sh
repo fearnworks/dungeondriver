@@ -5,8 +5,10 @@ set +o allexport
 
 cd ./ai_driver
 
+
 IMAGE_NAME="ghcr.io/fearnworks/aidriver"
 RELEASE_TAG="$IMAGE_NAME:release"
+
 GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 GIT_COMMIT=$(git rev-parse --short HEAD)
 
@@ -24,6 +26,7 @@ docker build -t "$IMAGE_NAME:$GIT_BRANCH" \
 # Security scanners:
 trivy image --ignore-unfixed --exit-code 1 \
 $IMAGE_NAME:$GIT_BRANCH
+
 
 docker push "$IMAGE_NAME:$GIT_BRANCH"
 docker push "$IMAGE_NAME:$GIT_COMMIT"
