@@ -58,3 +58,4 @@ ai_driver/artifacts/*
 artifacts/*
 ai_driver/hkunlp_instructor-xl
 *.db
+sandbox.ipynb

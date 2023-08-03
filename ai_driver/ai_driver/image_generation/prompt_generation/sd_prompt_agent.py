@@ -45,9 +45,9 @@ class CloudSDAgent(CloudChatAgent):
     #     generated_prompt = self.generate(prompt)
     #     rating = self.rate(generated_prompt)
     #     return SDPromptEvaluation(
-    #         temperature=self.temperature,
+    #         temperature=selftemperature,
     #         generated_prompt=generated_prompt,
-    #         evaluation=rating,
+    #         evaluation=rating,.
     #     )
 
 
