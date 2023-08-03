@@ -5,3 +5,7 @@ ai_driver/artifacts
 artifacts/
 hkunlp_instructor/
 vectorstore/
+Dockerfile
+.dockerignore
+venv/
+**/__pycache__

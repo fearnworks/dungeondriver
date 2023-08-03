@@ -13,11 +13,14 @@ RUN groupadd -r appuser && useradd --no-log-init -r -g appuser appuser
 RUN mkdir /app && \
     mkdir -p /home/appuser/.cache && \
     chown -R appuser:appuser /app /home/appuser
-COPY ./pyproject.toml /app/pyproject.toml
+COPY ./requirements.txt /app/requirements.txt
+COPY ./requirements-server.txt /app/requirements-server.txt
+RUN --mount=type=cache,target=~/.cache/pip \
+    pip install -r /app/requirements.txt && \
+    pip install -r /app/requirements-server.txt
 # # Set working directory to /app
 WORKDIR /app
-RUN --mount=type=cache,target=~/.cache/pip \
-    pip install .[server]
+
 
 
 COPY . /app/ai_driver
