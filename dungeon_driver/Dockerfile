@@ -1,7 +1,6 @@
 FROM python:3.11
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get update && apt-get -y install procps net-tools
-
+RUN apt-get update && apt-get -y install procps net-tools tini
 RUN python3 -m pip install --upgrade pip
 
 # Create appuser
@@ -29,5 +28,5 @@ RUN python3 -m pip install -e .
 
 
 USER appuser
-CMD ["python3", "dungeon_driver/main.py"]
+ENTRYPOINT ["tini", "--", "python3", "dungeon_driver/main.py"]
 # CMD ["tail", "-f", "/dev/null"]
