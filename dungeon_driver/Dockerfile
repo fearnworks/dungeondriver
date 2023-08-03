@@ -1,5 +1,7 @@
 FROM python:3.11
-RUN apt-get update && apt-get -y upgrade
+RUN --mount=type=cache,target=/var/cache/apt,id=apt \
+    apt-get update && apt-get -y upgrade
+RUN apt-get update && apt-get -y install procps net-tools tini
 
 RUN python3 -m pip install --upgrade pip
 
@@ -12,6 +14,7 @@ RUN mkdir /app && chown appuser:appuser /app
 RUN mkdir /home/appuser && chown appuser:appuser /home/appuser
 
 # Set environment variables
+ENV PYTHONFAULTHANDLER=1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV MPLCONFIGDIR /tmp/matplotlib
@@ -27,5 +30,5 @@ RUN python3 -m pip install -e .
 
 
 USER appuser
-CMD ["python3", "dungeon_driver/main.py"]
+ENTRYPOINT ["tini", "--", "python3", "dungeon_driver/main.py"]
 # CMD ["tail", "-f", "/dev/null"]
