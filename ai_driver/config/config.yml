@@ -10,5 +10,12 @@ CHAT_EMBED_MODEL: 'sentence-transformers/all-MiniLM-L6-v2'
 INSTRUCT_EMBED_MODEL: 'hkunlp/instructor-xl'
 MAX_NEW_TOKENS: 256
 TEMPERATURE: 0.01
+
+## LANGCHAIN SETTINGS
+LANGSMITH_LOGGING : False
+
 ## GGML SETTINGS
 GGML_GPU_LAYERS: 100000
+
+## DEV SETTINGS
+LOG_LEVEL: 'info' # 'debug' 'info' 'warning' 'error' 'critical'

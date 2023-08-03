@@ -1,6 +1,5 @@
 from langchain.llms import CTransformers
-import box
-import yaml
+from ai_driver.config import server_config
 from dataclasses import dataclass
 
 
@@ -28,13 +27,11 @@ def build_ggml_llm(config: GGMLConfig) -> CTransformers:
 
 def get_default_ggml_config():
     # Import config vars
-    with open("config/config.yml", "r", encoding="utf8") as ymlfile:
-        cfg = box.Box(yaml.safe_load(ymlfile))
-        config = GGMLConfig(
-            model_path=cfg.LLM_MODEL_BIN_PATH,
-            model_type=cfg.MODEL_TYPE,
-            max_new_tokens=cfg.MAX_NEW_TOKENS,
-            temperature=cfg.TEMPERATURE,
-            gpu_layers=cfg.GGML_GPU_LAYERS,
-        )
-        return config
+    config = GGMLConfig(
+        model_path=server_config.LLM_MODEL_BIN_PATH,
+        model_type=server_config.MODEL_TYPE,
+        max_new_tokens=server_config.MAX_NEW_TOKENS,
+        temperature=server_config.TEMPERATURE,
+        gpu_layers=server_config.GGML_GPU_LAYERS,
+    )
+    return config

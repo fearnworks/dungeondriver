@@ -1,6 +1,5 @@
 from dataclasses import dataclass
-import box
-import yaml
+from ai_driver.config import server_config
 
 
 @dataclass
@@ -10,7 +9,5 @@ class InstructConfig:
 
 def get_instruct_config():
     """Default Instruct Embedding Config"""
-    with open("config/config.yml", "r", encoding="utf8") as ymlfile:
-        cfg = box.Box(yaml.safe_load(ymlfile))
-        config = InstructConfig(embed_model=cfg.INSTRUCT_EMBED_MODEL)
-        return config
+    config = InstructConfig(embed_model=server_config.INSTRUCT_EMBED_MODEL)
+    return config

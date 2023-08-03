@@ -1,5 +1,5 @@
-import box
-import yaml
+from ai_driver.config import server_config
+
 
 from langchain import PromptTemplate
 from langchain.chains import RetrievalQA
@@ -48,13 +48,10 @@ def setup_local_qa_db(config: QADBConfig, device: str = "cuda"):
 
 
 def get_default_qa_config():
-    # Import config vars
-    with open("config/config.yml", "r", encoding="utf8") as ymlfile:
-        cfg = box.Box(yaml.safe_load(ymlfile))
-        config = QADBConfig(
-            db_path=cfg.DB_PATH,
-            embed_model=cfg.CHAT_EMBED_MODEL,
-            return_source=cfg.RETURN_SOURCE_DOCUMENTS,
-            vector_count=cfg.VECTOR_COUNT,
-        )
-        return config
+    config = QADBConfig(
+        db_path=server_config.DB_PATH,
+        embed_model=server_config.CHAT_EMBED_MODEL,
+        return_source=server_config.RETURN_SOURCE_DOCUMENTS,
+        vector_count=server_config.VECTOR_COUNT,
+    )
+    return config

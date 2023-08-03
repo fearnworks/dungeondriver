@@ -5,7 +5,8 @@ from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
 
-from ai_driver.langsmith_config import get_default_langsmith_client
+from ai_driver.langsmith_config import get_client
+from ai_driver.config import server_config
 
 
 @dataclass
@@ -14,21 +15,24 @@ class CloudChatConfig:
     temperature: float = 0.0
     model: str = "gpt-3.5-turbo-0613"
     verbose: bool = False
-    langsmith: bool = True
 
 
 class CloudChatAgent:
     def __init__(self, config: CloudChatConfig = CloudChatConfig()):
-        if config.langsmith:
+        if server_config.LANGSMITH_LOGGING:
+            logger.info("Langsmith enabled")
             self.llm: ChatOpenAI = ChatOpenAI(
-                client=get_default_langsmith_client(),
+                client=get_client(),
                 temperature=config.temperature,
                 model=config.model,
             )
         else:
-            self.llm: ChatOpenAI = config.llm(
-                temperature=config.temperature, model=config.model
+            logger.info("Langsmith disabled")
+            self.llm: ChatOpenAI = ChatOpenAI(
+                temperature=config.temperature,
+                model=config.model,
             )
+
         self.chat = self.llm  # backwards compat
         self.memory = ConversationBufferMemory()
         self.conversation = ConversationChain(

@@ -9,7 +9,7 @@ from ai_driver.vector_storage.pinecone_manager import (
     get_default_pinecone_session,
     PineconeConfig,
 )
-from ai_driver.langsmith_config import get_default_langsmith_client
+from ai_driver.langsmith_config import get_client
 from ai_driver.vector_storage.faiss_manager import embed_FAISS_from_documents
 from ai_driver.local_loader import get_default_local_download
 from ai_driver.qa import query_documents
@@ -29,7 +29,7 @@ def pinecone_pipeline(query: str):
     logger.info(config)
     vector_store = get_default_pinecone_session(config).docsearch
     retriever = vector_store.as_retriever(search_kwargs={"k": 3})
-    client = get_default_langsmith_client()
+    client = get_client()
     qa_chain = RetrievalQA.from_chain_type(
         llm=OpenAI(client=client, temperature=0.2),
         chain_type="stuff",
@@ -80,7 +80,7 @@ def local_download_pipeline(config=None):
         texts, embedding_model_name, embedding_model_kwargs
     )
     retriever = vector_store.as_retriever(search_kwargs={"k": 3})
-    client = get_default_langsmith_client()
+    client = get_client()
     qa_chain = RetrievalQA.from_chain_type(
         llm=OpenAI(client=client, temperature=0.2),
         chain_type="stuff",

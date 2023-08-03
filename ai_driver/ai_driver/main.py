@@ -1,11 +1,8 @@
-from dotenv import load_dotenv, find_dotenv
-
-
-import json
+from ai_driver.config import server_config, config_langchain
 from loguru import logger
 import time
 from pathlib import Path
-from fastapi import APIRouter, Depends, FastAPI, HTTPException, Request
+from fastapi import APIRouter, Depends, FastAPI, Request
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -17,9 +14,7 @@ from ai_driver.server.api import deps
 from ai_driver.server.api.api_v1.api import api_router
 from ai_driver.server.core.config import settings, setup_app_logging
 
-
-load_dotenv(find_dotenv())
-
+logger.info(server_config)
 # Define the base path of this script
 BASE_PATH = Path(__file__).resolve().parent
 
@@ -27,9 +22,6 @@ BASE_PATH = Path(__file__).resolve().parent
 TEMPLATES = Jinja2Templates(directory=str(BASE_PATH / "templates"))
 
 setup_app_logging(config=settings)
-
-import asyncio
-import json
 
 from starlette.requests import Request
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
@@ -103,11 +95,6 @@ def root(
     return TEMPLATES.TemplateResponse("index.html", {"request": request})
 
 
-@app.get("/ping")
-async def pong():
-    return {"ping": "pong!"}
-
-
 @app.middleware("http")
 async def add_process_time_header(request: Request, call_next):
     """
@@ -138,4 +125,4 @@ if __name__ == "__main__":
     import uvicorn
 
     logger.info("Starting uvicorn")
-    uvicorn.run(app, host="0.0.0.0", port=28001, log_level="debug")
+    uvicorn.run(app, host="0.0.0.0", port=28001, log_level=server_config.LOG_LEVEL)
