@@ -28,3 +28,4 @@ python-box
 ctransformers
 uvicorn
 fastapi
+tiktoken

@@ -44,8 +44,6 @@ def pinecone_pipeline(query: str):
 def local_llm_pipeline(query: str):
     """Example Local LLM Pipeline"""
 
-    query = "How do saving throws work?"
-
     # Setup DBQA
     start = timeit.default_timer()
     config = get_default_qa_config()
