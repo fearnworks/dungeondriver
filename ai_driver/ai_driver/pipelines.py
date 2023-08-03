@@ -67,10 +67,15 @@ def local_llm_pipeline(query: str):
     return response
 
 
+from ai_driver.config import server_config
+
+
 def local_download_pipeline(config=None):
     """Example local store pipeline"""
+
     logger.info("Local download pipeline: FAISS")
-    texts = get_default_local_download()
+    dir_path = server_config.DATA_PATH
+    texts = get_default_local_download(dir_path=dir_path)
     config: InstructConfig = get_instruct_config()
 
     embedding_model_name = config.embed_model

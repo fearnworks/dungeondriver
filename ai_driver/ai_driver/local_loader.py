@@ -3,7 +3,6 @@ from langchain.document_loaders import PyPDFLoader, DirectoryLoader
 from loguru import logger
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema import Document
-from ai_driver.config import server_config
 
 
 def load(dir_path: str, glob_pattern: str) -> Iterable[Document]:
@@ -40,9 +39,8 @@ def split(documents: Iterable[Document], chunk_size, chunk_overlap) -> List[Docu
     return texts
 
 
-def get_default_local_download() -> List[Document]:
+def get_default_local_download(dir_path: str) -> List[Document]:
     """Default document list for local download"""
-    dir_path = server_config.DATA_PATH
     glob_pattern = "./*.pdf"
 
     chunks = load(dir_path, glob_pattern)
