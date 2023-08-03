@@ -10,10 +10,9 @@ Disclaimer:
 This project is pre-alpha and not ready for use. We are currently in the process of building out the core functionality. Please check back soon!
 ====
 
+Welcome to DungeonMaster Assistant, your indispensable ally for creating truly immersive tabletop gaming experiences! Whether you're weaving intricate narratives, managing epic encounters, or guiding a band of adventurers through a world of your creation, our tool stands ready to help. Our goal is to provide a dynamic set of tools that allows you to focus on storytelling and player engagement, while we handle the logistical details—all from the comfort of your own hardware.
 
-Welcome to DungeonDriver, your must-have companion for a truly immersive gaming adventure! Whether you're exploring perilous dungeons, battling mighty dragons, or embarking on an epic quest, DungeonDriver takes your gaming parties to the next level. Our goal is to build a dynamic set of tools allowing you to dive into a world of personalized experiences, dynamic interactions, and magical moments. All capable of being hosted from your very own hardware
-
-Are you ready to enhance your tabletop escapades and redefine how you play? With DungeonDriver, you're not just a player—you're a legendary hero on a grand journey. Gather your party, embark on unforgettable stories, and let DungeonDriver be the trusted companion that guides you every step of the way. Get ready to level up your gaming experience like never before!
+Are you ready to revolutionize your role as a Dungeon Master? Gather your party, embark on tales of suspense and excitement, and let DungeonMaster Assistant be your trusted co-pilot in managing the game. Get ready to elevate your Dungeon Master experience like never before!
 
 ## 🌟 Features
 - Cloud Based Inference

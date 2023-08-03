@@ -1,4 +1,5 @@
 FROM python:3.11
+RUN apt-get update && apt-get -y upgrade
 
 RUN python3 -m pip install --upgrade pip
 
