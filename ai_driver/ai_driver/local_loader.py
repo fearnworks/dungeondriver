@@ -10,8 +10,6 @@ from ai_driver.vector_storage.faiss_manager import embed_FAISS_from_documents
 from ai_driver.retrieval.qa import qa_pipeline
 from ai_driver.instruct import get_instruct_config, InstructConfig
 
-from ai_driver.config import server_config
-
 
 def load(dir_path: str, glob_pattern: str) -> Iterable[Document]:
     loader = DirectoryLoader(
