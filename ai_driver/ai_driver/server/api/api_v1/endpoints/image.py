@@ -6,9 +6,9 @@ searching characters and fetching character ideas from Reddit.
 import asyncio
 from typing import Any, Optional
 from loguru import logger
-from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-import httpx
+
 from ai_driver.cloud_llm.cloud_chat_agent import CloudChatAgent
 from ai_driver.image_generation.prompt_generation.sd_prompt_agent import (
     get_default_sd_agent,

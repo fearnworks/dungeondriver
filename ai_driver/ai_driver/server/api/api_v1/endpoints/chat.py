@@ -2,27 +2,16 @@
 This module defines API endpoints related to characters such as fetching, creating, updating,
 searching characters and fetching character ideas from Reddit.
 """
-
-import asyncio
-from typing import Any, Optional
 from loguru import logger
-from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-import httpx
+
 from ai_driver.cloud_llm.cloud_chat_agent import CloudChatAgent
 from ai_driver.local_llm.ggml_pipeline import local_llm_qa_pipeline
 from ai_driver.server import crud, schemas
 from ai_driver.server.api import deps
-from ai_driver.pipelines import (
-    local_download_pipeline,
-)
+from ai_driver.local_loader import local_download_pipeline
 from ai_driver.cloud_llm.cloud_qa import pinecone_qa_pipeline
-
-# from app.clients.reddit import RedditClient
-# from app.models.user import User
-# from app.schemas.character import (Character, CharacterCreate,
-#                                    CharacterSearchResults,
-#                                    CharacterUpdateRestricted)
 
 router = APIRouter()
 
