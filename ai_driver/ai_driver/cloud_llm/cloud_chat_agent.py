@@ -19,19 +19,11 @@ class CloudChatConfig:
 
 class CloudChatAgent:
     def __init__(self, config: CloudChatConfig = CloudChatConfig()):
-        if server_config.LANGSMITH_LOGGING:
-            logger.info("Langsmith enabled")
-            self.llm: ChatOpenAI = ChatOpenAI(
-                client=get_client(),
-                temperature=config.temperature,
-                model=config.model,
-            )
-        else:
-            logger.info("Langsmith disabled")
-            self.llm: ChatOpenAI = ChatOpenAI(
-                temperature=config.temperature,
-                model=config.model,
-            )
+        self.llm: ChatOpenAI = ChatOpenAI(
+            client=get_client(),
+            temperature=config.temperature,
+            model=config.model,
+        )
 
         self.chat = self.llm  # backwards compat
         self.memory = ConversationBufferMemory()
