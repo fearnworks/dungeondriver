@@ -68,6 +68,18 @@ graph TB
 ## 🚀 Getting Started
 DungeonDriver and its companion inference server AI Driver are meant to be run inside of container for easy deployment in any environment. Docker and Docker Compose must be installed in your environment. Cuda drivers are required for GPU support. Drivers should be capable of running cuda 12.x
 
+### Docker
+To pull from the latest release image
+
+```bash
+docker pull ghcr.io/fearnworks/dungeondriver:release
+docker pull ghcr.io/fearnworks/ai_driver:release
+```
+
+
+### Build from Repo
+
+
 ```bash
 git clone https://github.com/fearnworks/dungeondriver
 ```

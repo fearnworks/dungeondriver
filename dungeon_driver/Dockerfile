@@ -1,5 +1,6 @@
 FROM python:3.11
-RUN apt-get update && apt-get -y upgrade
+RUN --mount=type=cache,target=/var/cache/apt,id=apt \
+    apt-get update && apt-get -y upgrade
 RUN apt-get update && apt-get -y install procps net-tools tini
 
 RUN python3 -m pip install --upgrade pip
