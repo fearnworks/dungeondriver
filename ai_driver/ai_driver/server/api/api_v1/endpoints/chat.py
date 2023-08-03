@@ -13,6 +13,8 @@ from ai_driver.server.api import deps
 from ai_driver.local_loader import local_download_pipeline
 from ai_driver.cloud_llm.cloud_qa import pinecone_qa_pipeline
 from ai_driver.config import server_config
+from ai_driver.local_llm.ggml_config import get_default_ggml_config
+from ai_driver.retrieval.qa_config import get_default_qa_config
 
 router = APIRouter()
 
@@ -21,7 +23,9 @@ router = APIRouter()
 def local_endpoint(
     db: Session = Depends(deps.get_db),
 ):
-    local_download_pipeline(dir_path=server_config.DATA_PATH)
+    local_download_pipeline(
+        dir_path=server_config.DATA_PATH, embed_model=server_config.INSTRUCT_EMBED_MODEL
+    )
 
 
 @router.post("/pinecone", status_code=200, response_model=schemas.ChatBase)
@@ -36,7 +40,11 @@ def pinecone_endpoint(request: schemas.ChatRequest, db: Session = Depends(deps.g
 def local_llm_endpoint(
     request: schemas.ChatRequest, db: Session = Depends(deps.get_db)
 ):
-    response = local_llm_qa_pipeline(request.query)
+    qa_config = get_default_qa_config()
+    ggml_config = get_default_ggml_config()
+    response = local_llm_qa_pipeline(
+        request.query, device="cuda", qa_config=qa_config, ggml_config=ggml_config
+    )
     result = schemas.ChatBase(query=request.query, result=response)
     logger.info(result)
     return result

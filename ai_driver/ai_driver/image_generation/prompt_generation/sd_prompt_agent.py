@@ -7,8 +7,6 @@ from ai_driver.image_generation.prompt_generation.prompt_rating import SDPromptR
 from dataclasses import dataclass
 from typing import Any
 
-## change when moving to module
-
 
 @dataclass
 class SDAgentConfig(CloudChatConfig):
@@ -30,25 +28,11 @@ class CloudSDAgent(CloudChatAgent):
             config.sd_prompt_rating_template
         )
 
-    # def generate(self, prompt):
-    #     img_request = self.template.format_messages(prompt=prompt)
-    #     response = self.chat(img_request)
-    #     return response.content.replace("SDHelper:", "").strip()
-
     def rate(self, generated_prompt):
         # rate_template = ChatPromptTemplate.from_template(generated_prompt)
         rate_request = self.rate_template.format_messages(prompt=generated_prompt)
         response = self.chat(rate_request)
         return SDPromptRating.parse(response.content)
-
-    # def generate_and_rate(self, prompt) -> SDPromptEvaluation:
-    #     generated_prompt = self.generate(prompt)
-    #     rating = self.rate(generated_prompt)
-    #     return SDPromptEvaluation(
-    #         temperature=selftemperature,
-    #         generated_prompt=generated_prompt,
-    #         evaluation=rating,.
-    #     )
 
 
 def get_default_sd_agent() -> CloudSDAgent:

@@ -8,7 +8,7 @@ from langchain.chat_models import ChatOpenAI
 from ai_driver.langsmith_config import get_client
 from ai_driver.vector_storage.faiss_manager import embed_FAISS_from_documents
 from ai_driver.retrieval.qa import qa_pipeline
-from ai_driver.instruct import get_instruct_config, InstructConfig
+from ai_driver.instruct import InstructConfig
 
 
 def load(dir_path: str, glob_pattern: str) -> Iterable[Document]:
@@ -45,12 +45,12 @@ def split(documents: Iterable[Document], chunk_size, chunk_overlap) -> List[Docu
     return texts
 
 
-def local_download_pipeline(dir_path: str):
+def local_download_pipeline(dir_path: str, embed_model: str):
     """Example local store pipeline"""
 
     logger.info("Local download pipeline: FAISS")
     texts = get_default_local_download(dir_path=dir_path)
-    config: InstructConfig = get_instruct_config()
+    config: InstructConfig = InstructConfig(embed_model=embed_model)
 
     embedding_model_name = config.embed_model
     embedding_model_kwargs = {"device": "cuda"}
