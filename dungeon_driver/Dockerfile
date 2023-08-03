@@ -1,5 +1,6 @@
 FROM python:3.11
 RUN apt-get update && apt-get -y upgrade
+RUN apt-get update && apt-get -y install procps net-tools
 
 RUN python3 -m pip install --upgrade pip
 
@@ -12,6 +13,7 @@ RUN mkdir /app && chown appuser:appuser /app
 RUN mkdir /home/appuser && chown appuser:appuser /home/appuser
 
 # Set environment variables
+ENV PYTHONFAULTHANDLER=1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV MPLCONFIGDIR /tmp/matplotlib

@@ -15,9 +15,9 @@ echo "$REG_TOKEN" | docker login ghcr.io -u USERNAME --password-stdin
 
 docker pull "$RELEASE_TAG" || true
 docker build -t "$IMAGE_NAME:$GIT_BRANCH" \
--t "$IMAGE_NAME:$GIT_COMMIT" . \
+-t "$IMAGE_NAME:$GIT_COMMIT"  \
 --label git-commit=$GIT_COMMIT \
---label git-branch=$GIT_BRANCH .
+--label git-branch=$GIT_BRANCH \
 --build-arg BUILDKIT_INLINE_CACHE=1 \
 --cache-from=$RELEASE_TAG .
 
