@@ -1,5 +1,8 @@
 FROM nvidia/cuda:12.2.0-runtime-ubuntu22.04
 ENV PYTHONFAULTHANDLER=1
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV MPLCONFIGDIR /tmp/matplotlib
 # Install dependencies
 RUN --mount=type=cache,target=/var/cache/apt,id=apt \
     apt-get update && \

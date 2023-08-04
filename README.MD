@@ -71,12 +71,17 @@ DungeonDriver and its companion inference server AI Driver are meant to be run i
 ### Docker
 To pull from the latest release image
 
+
+
+
 ```bash
-docker pull ghcr.io/fearnworks/dungeondriver:release
-docker pull ghcr.io/fearnworks/ai_driver:release
+docker pull fearnworks/aidriver:main
+docker pull fearnworks/dungeondriver:main
 ```
 
-
+Dockerhub links :
+[Title](https://hub.docker.com/repository/docker/fearnworks/aidriver/general)
+[Title](https://hub.docker.com/repository/docker/fearnworks/dungeondriver/general)
 ### Build from Repo
 
 

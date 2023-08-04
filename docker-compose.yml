@@ -41,7 +41,6 @@ services:
     depends_on:
       - ai_driver
 
-
 networks:
   dd-network:
     external: true

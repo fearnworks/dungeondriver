@@ -1,9 +1,12 @@
 import httpx
 from loguru import logger
 import gradio as gr
-
+import os
 import dungeon_driver.webui as UIComponents
 import time
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 
 def init_interface():
@@ -20,6 +23,7 @@ def init_interface():
             interface["dnd_qa"]
 
     ui.queue()
+
     ui.launch(
         prevent_thread_lock=True,
         server_name="0.0.0.0",
