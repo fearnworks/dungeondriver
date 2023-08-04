@@ -24,6 +24,9 @@ import tqdm
 from requests.adapters import HTTPAdapter
 from tqdm.contrib.concurrent import thread_map
 from requests import Session
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 
 def get_filename_from_url(url: str) -> str:
@@ -165,7 +168,32 @@ def make_request(session: Session, url: str) -> Dict:
     return json.loads(r.content)
 
 
-def extract_links(data_list: List[Dict], model: str, branch: str) -> List[str]:
+def filter_quants(fname: str, quant_filter: Dict[str, bool]) -> bool:
+    """
+    Filters filenames based on a quantization filter.
+
+    Args:
+        fname (str): The filename.
+        quant_filter (Dict[str, bool]): A dictionary with key-value pairs to filter filenames.
+
+    Returns:
+        bool: True if the filename contains a key from the quant_filter where the corresponding value is True,
+        and does not contain a key where the corresponding value is False, else False.
+    """
+    if not fname.endswith(".bin"):
+        return False
+    for key, value in quant_filter.items():
+        if key in fname:
+            if value:
+                continue
+            else:
+                return True
+    return False
+
+
+def extract_links(
+    data_list: List[Dict], model: str, branch: str, quant_filter: Dict[str, bool]
+) -> List[str]:
     """
     Extracts download links from a list of file data.
 
@@ -173,6 +201,7 @@ def extract_links(data_list: List[Dict], model: str, branch: str) -> List[str]:
         data_list (List[Dict]): A list of dictionaries containing file data.
         model (str): The model name.
         branch (str): The branch name.
+        quant_filter (Dict[str, bool]): A dictionary with key-value pairs to filter filenames.
 
     Returns:
         List[str]: A list of download links.
@@ -180,6 +209,9 @@ def extract_links(data_list: List[Dict], model: str, branch: str) -> List[str]:
     links = []
     for file in data_list:
         fname = file["path"]
+        if filter_quants(fname, quant_filter):
+            logger.info(f"Filter for quantized : {fname}")
+            continue
         if fname in ["1_Pooling", "2_Dense"]:
             logger.info(f"Subdir for sentence embed : {fname}")
             links.append(
@@ -229,22 +261,39 @@ def get_download_links(session: Session, model: str, branch: str) -> List[str]:
     cursor = b""
     links = []
 
+    quant_filter = {
+        "q2_K": True,
+        "q3_K_L": False,
+        "q3_K_M": False,
+        "q3_K_S": False,
+        "q4_0": True,
+        "q4_1": False,
+        "q4_K_M": False,
+        "q4_K_S": False,
+        "q5_0": True,
+        "q5_1": False,
+        "q5_K_M": False,
+        "q5_K_S": False,
+        "q6_K": False,
+        "q8_0": False,
+    }
+
     while True:
         url = construct_url(base, page, cursor)
         data_list = make_request(session, url)
         if len(data_list) == 0:
             break
-        links.extend(extract_links(data_list, model, branch))
+        links.extend(extract_links(data_list, model, branch, quant_filter=quant_filter))
         cursor = update_cursor(data_list)
 
     return links
 
 
 if __name__ == "__main__":
-    # models = ["TheBloke/MPT-7B-Instruct-GGML", "TheBloke/Llama-2-7B-Chat-GGML"]
+    models = ["TheBloke/Llama-2-7B-Chat-GGML"]
     # sentence_models = ["sentence-transformers/all-MiniLM-L6-v2", "hkunlp/instructor-xl"]
-    test_model = ["google/flan-t5-base"]
-    models = test_model
+    # test_model = ["google/flan-t5-base"]
+
     branch = "main"
     threads = 6
     output_base = "artifacts"
