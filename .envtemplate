@@ -3,7 +3,7 @@ OPENAI_API_KEY=
 
 # External Vector Store
 PINECONE_API_KEY=
-PINECONE_ENV=
+PINECONE_API_ENV=
 PINECONE_INDEX_NAME=
 
 # Model Downloads

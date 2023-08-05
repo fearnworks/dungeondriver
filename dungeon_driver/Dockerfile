@@ -31,7 +31,7 @@ WORKDIR /app
 COPY --chown=appuser:appuser  . /app/dungeon_driver
 USER appuser
 WORKDIR /app/dungeon_driver
-RUN python3 -m pip install .
+RUN python3 -m pip install -e .
 
 ENTRYPOINT ["tini", "--", "python3", "dungeon_driver/main.py"]
 # CMD ["tail", "-f", "/dev/null"]

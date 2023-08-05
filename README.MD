@@ -92,18 +92,26 @@ cd dungeondriver
 ```
 
 Install dependencies for the build chain and python virtual environment
+
+Dependencies : (easy install)
 ```bash
-Dependencies
-```bash
-sudo apt-get update && \
-sudo apt-get install python-venv
-sudo apt install docker-compose
+chmod +x ./scripts/initial_server_setup_with_deps.sh
+./scripts/initial_server_setup_with_deps.sh
+cp .envtemplate .env
 ```
 
-Ai Driver Server setup
+Setup nvidia drivers
+
 ```bash
-cp .envtemplate .env
-docker-compose up --build
+chmod +x ./scripts/nvidia_driver_setup.sh
+sudo ./scripts/nvidia_driver_setup.sh
+```
+
+Reboot your machine to ensure the drivers are loaded
+
+Ai Driver Server run
+```bash
+sudo docker-compose up --build
 ```
 
 Download the models and place them in the top level artifacts folder. There is a helper script here :

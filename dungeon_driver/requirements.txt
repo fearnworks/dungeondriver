@@ -42,8 +42,6 @@ contourpy==1.1.0
     # via matplotlib
 cycler==0.11.0
     # via matplotlib
-debugpy==1.6.8
-    # via -r requirements.in
 exceptiongroup==1.1.2
     # via anyio
 fastapi==0.100.1
