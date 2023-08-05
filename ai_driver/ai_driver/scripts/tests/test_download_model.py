@@ -7,7 +7,29 @@ from ai_driver.scripts.download_model import (
     construct_url,
     extract_links,
     update_cursor,
+    filter_quants,
 )
+
+
+@pytest.fixture
+def mock_quant_filter():
+    quant_filter = {
+        "q2_K": True,
+        "q3_K_L": False,
+        "q3_K_M": False,
+        "q3_K_S": False,
+        "q4_0": True,
+        "q4_1": False,
+        "q4_K_M": False,
+        "q4_K_S": False,
+        "q5_0": True,
+        "q5_1": False,
+        "q5_K_M": False,
+        "q5_K_S": False,
+        "q6_K": False,
+        "q8_0": False,
+    }
+    return quant_filter
 
 
 # Test get_filename_from_url
@@ -45,7 +67,9 @@ def test_construct_url_should_return_url_with_cursor_when_cursor_is_provided():
 
 
 # Test extract_links
-def test_extract_links_should_extract_links_for_pooling_and_dense_directories_and_other_files():
+def test_extract_links_should_extract_links_for_pooling_and_dense_directories_and_other_files(
+    mock_quant_filter,
+):
     data_list = [
         {"path": "1_Pooling"},
         {"path": "2_Dense"},
@@ -60,7 +84,7 @@ def test_extract_links_should_extract_links_for_pooling_and_dense_directories_an
         "https://huggingface.co/model/resolve/branch/2_Dense/pytorch_model.bin",
         "https://huggingface.co/model/resolve/branch/other",
     ]
-    assert extract_links(data_list, model, branch) == expected_links
+    assert extract_links(data_list, model, branch, mock_quant_filter) == expected_links
 
 
 # Test update_cursor
@@ -69,3 +93,18 @@ def test_update_cursor_should_return_base64_encoded_filename_and_cursor_string()
     # The expected_cursor is hardcoded after manually computing the expected result
     expected_cursor = b"ZXlKbWFXeGxYMjVoYldVaU9pSm1hV3hsTWlKOTo1MA%3D%3D"
     assert update_cursor(data_list) == expected_cursor
+
+
+def test_filter_quants(mock_quant_filter):
+    fname = "mythologic-l2-13b.ggmlv3.q2_K.bin"
+
+    assert filter_quants(fname, mock_quant_filter) == False
+
+    fname = "mythologic-l2-13b.ggmlv3.q3_K_L.bin"
+    assert filter_quants(fname, mock_quant_filter) == True
+
+    fname = "mythologic-l2-13b.ggmlv3.q4_0.bin"
+    assert filter_quants(fname, mock_quant_filter) == False
+
+    fname = "mythologic-l2-13b.ggmlv3.q8_0.bin"
+    assert filter_quants(fname, mock_quant_filter) == True
