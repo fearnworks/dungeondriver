@@ -25,7 +25,7 @@ def from_yaml(filepath):
 
 def run_db_build():
     # Load configuration from YAML file
-    config = from_yaml("config.yaml")
+    config = from_yaml("./ai_driver/config/config.yaml")
 
     # Build vector database
     loader = DirectoryLoader(config["data_path"], glob="*.pdf", loader_cls=PyPDFLoader)
