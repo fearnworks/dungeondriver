@@ -14,11 +14,11 @@ def from_yaml(filepath):
             logger.error(f"Error loading config file: {exc}")
             raise exc
         kwargs = {
-            "data_path": data.get("DATA_PATH"),
+            "data_path": data.get("." + "DATA_PATH"),
             "chunk_size": data.get("CHUNK_SIZE"),
             "chunk_overlap": data.get("CHUNK_OVERLAP"),
             "chat_embed_model": data.get("CHAT_EMBED_MODEL"),
-            "db_path": data.get("DB_PATH"),
+            "db_path": "." + data.get("DB_PATH"),
         }
         return kwargs
 
