@@ -262,11 +262,11 @@ def get_download_links(session: Session, model: str, branch: str) -> List[str]:
     links = []
 
     quant_filter = {
-        "q2_K": True,
+        "q2_K": False,
         "q3_K_L": False,
         "q3_K_M": False,
         "q3_K_S": False,
-        "q4_0": True,
+        "q4_0": False,
         "q4_1": False,
         "q4_K_M": False,
         "q4_K_S": False,
