@@ -125,7 +125,15 @@ We welcome contributions to DungeonDriver! Follow the [Contributing Guidelines](
 
 ## ❓ FAQ
 
-# STUB
+### Common Errors
+If you receive a Failed to create llm 'llama' delete your llama model in the artifacts folder and try again. This is an issue with the download from hugging face
+
+To do so run the following command from the root of the project
+```bash
+rm -rf ./artifacts/* # or the specific model folder
+source .server-venv/bin/activate
+python ai_driver/ai_driver/scripts/download_model.py
+```
 
 ## 📬 Contact
 
