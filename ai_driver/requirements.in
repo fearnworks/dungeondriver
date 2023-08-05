@@ -2,7 +2,6 @@ requests
 python-dotenv
 pandas~=2.0.0
 pyarrow~=12.0.0
-debugpy
 loguru
 httpx
 anyio
