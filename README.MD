@@ -100,6 +100,15 @@ chmod +x ./scripts/initial_server_setup_with_deps.sh
 cp .envtemplate .env
 ```
 
+Setup nvidia drivers
+
+```bash
+chmod +x ./scripts/nvidia_driver_setup.sh
+sudo ./scripts/nvidia_driver_setup.sh
+```
+
+Reboot your machine to ensure the drivers are loaded
+
 Ai Driver Server run
 ```bash
 sudo docker-compose up --build
