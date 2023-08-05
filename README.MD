@@ -80,8 +80,8 @@ docker pull fearnworks/dungeondriver:main
 ```
 
 Dockerhub links :
-[Title](https://hub.docker.com/repository/docker/fearnworks/aidriver/general)
-[Title](https://hub.docker.com/repository/docker/fearnworks/dungeondriver/general)
+[AI Driver](https://hub.docker.com/repository/docker/fearnworks/aidriver/general)
+[DungeonDriver](https://hub.docker.com/repository/docker/fearnworks/dungeondriver/general)
 ### Build from Repo
 
 
@@ -91,12 +91,12 @@ git clone https://github.com/fearnworks/dungeondriver
 
 Ai Driver setup
 ```bash
-cp .envexample .env
+cp .envtemplate .env
 docker-compose up --build
 ```
 
 Download the models and place them in the top level artifacts folder. There is a helper script here :
-[Title](ai_driver/ai_driver/scripts/download_model.py)
+[download_model](ai_driver/ai_driver/scripts/download_model.py)
 
 We'll be adding more mature support for model downloads in the future
 
