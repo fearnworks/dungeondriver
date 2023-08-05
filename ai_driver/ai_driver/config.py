@@ -41,6 +41,6 @@ def config_langchain():
         os.environ["LANGCHAIN_TRACING_V2"] = "false"
 
 
-filename = os.getenv("CONFIG_FILE", "config/config.yml").lower()
+filename = os.getenv("CONFIG_FILE", "config/config.yaml").lower()
 server_config = Config.from_yaml(filename)
 config_langchain()
