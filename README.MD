@@ -83,13 +83,24 @@ Dockerhub links :
 [AI Driver](https://hub.docker.com/repository/docker/fearnworks/aidriver/general)
 [DungeonDriver](https://hub.docker.com/repository/docker/fearnworks/dungeondriver/general)
 ### Build from Repo
-
+Currently this proces is only tested on Ubuntu 22.04
+Clone the repo
 
 ```bash
 git clone https://github.com/fearnworks/dungeondriver
+cd dungeondriver
 ```
 
-Ai Driver setup
+Install dependencies for the build chain and python virtual environment
+```bash
+Dependencies
+```bash
+sudo apt-get update && \
+sudo apt-get install python-venv
+sudo apt install docker-compose
+```
+
+Ai Driver Server setup
 ```bash
 cp .envtemplate .env
 docker-compose up --build
