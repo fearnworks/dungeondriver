@@ -26,9 +26,10 @@ while getopts "adv" opt; do
   esac
 done
 
-docker network create dd-network
+sudo docker network create dd-network # handle for folks who don't have docker groups set up
 
 python3 -m venv .server_venv && source .server_venv/bin/activate
+python3 -m pip install --upgrade pip
 python3 -m pip install -r ./ai_driver/requirements.txt
 
 if [ "$DOWNLOAD_MODEL" = true ]; then
