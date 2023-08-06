@@ -2,14 +2,15 @@ import gradio as gr
 import httpx
 from loguru import logger
 from pathlib import Path
+import secrets
 
 timeout = httpx.Timeout(600.0)
 
 
-async def make_request(prompt, endpoint):
+async def make_request(prompt, session_id, endpoint):
     async with httpx.AsyncClient(timeout=timeout) as client:
         logger.info(f"Making request to {endpoint} with query {prompt}")
-        request = {"query": prompt}
+        request = {"query": prompt, "session_id": session_id}
         response = await client.post(
             f"http://ai_driver:28001/api/v1/chat/{endpoint}",
             json=request,
@@ -18,25 +19,33 @@ async def make_request(prompt, endpoint):
         return response
 
 
-async def chat(chat_history, message: str):
+async def chat(chat_history, message: str, session_id: str):
     logger.info(f"Chatbot received message: {message}")
-    logger.info(f"Chatbot chat history: {chat_history}")
-    response = await make_request(message, "cloudllm")
+    response = await make_request(message, session_id, "cloudllm")
     response = response.json()
     history = chat_history + [(message, response["result"])]
     return history
 
 
 def create_chat_interface() -> gr.Blocks:
+    session_id = secrets.randbits(32)
     with gr.Blocks() as chat_tab:
         gr.Markdown("# Chatbot")
-        chat_history = [("Hello", "Hi!")]
-        chat_display = gr.Chatbot(
-            chat_history, elem_id="chatbot", height=650, placeholder="Type a message..."
-        )
-        chat_input = gr.Textbox("")
-        chat_input.submit(
-            chat, inputs=[chat_display, chat_input], outputs=[chat_display]
-        )
+        with gr.Row():
+            chat_history = [("Hello", "Hi!")]
+            chat_display = gr.Chatbot(
+                chat_history,
+                elem_id="chatbot",
+                height=1250,
+                placeholder="Type a message...",
+            )
+        with gr.Row():
+            chat_input = gr.Textbox("")
+            session_id_label = gr.Textbox(session_id, label="Session ID")
+            chat_input.submit(
+                chat,
+                inputs=[chat_display, chat_input, session_id_label],
+                outputs=[chat_display],
+            )
 
     return chat_tab

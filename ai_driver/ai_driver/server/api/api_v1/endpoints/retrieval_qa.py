@@ -1,6 +1,5 @@
 """
-This module defines API endpoints related to characters such as fetching, creating, updating,
-searching characters and fetching character ideas from Reddit.
+This module defines API endpoints related to vector store retrieval and querying
 """
 from loguru import logger
 from fastapi import APIRouter, Depends
@@ -28,23 +27,21 @@ def local_endpoint(
     )
 
 
-@router.post("/pinecone", status_code=200, response_model=schemas.ChatBase)
-def pinecone_endpoint(request: schemas.ChatRequest, db: Session = Depends(deps.get_db)):
+@router.post("/pinecone", status_code=200, response_model=schemas.QABase)
+def pinecone_endpoint(request: schemas.QARequest, db: Session = Depends(deps.get_db)):
     response = pinecone_qa_pipeline(request.query)
-    result = schemas.ChatBase(query=request.query, result=response)
+    result = schemas.QABase(query=request.query, result=response)
     logger.info(result)
     return result
 
 
-@router.post("/local_llm", status_code=200, response_model=schemas.ChatBase)
-def local_llm_endpoint(
-    request: schemas.ChatRequest, db: Session = Depends(deps.get_db)
-):
+@router.post("/local_llm", status_code=200, response_model=schemas.QABase)
+def local_llm_endpoint(request: schemas.QARequest, db: Session = Depends(deps.get_db)):
     qa_config = get_default_qa_config()
     ggml_config = get_default_ggml_config()
     response = local_llm_qa_pipeline(
         request.query, device="cuda", qa_config=qa_config, ggml_config=ggml_config
     )
-    result = schemas.ChatBase(query=request.query, result=response)
+    result = schemas.QABase(query=request.query, result=response)
     logger.info(result)
     return result

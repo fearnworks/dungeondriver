@@ -10,3 +10,5 @@ gunicorn
 passlib
 python-jose
 tenacity
+redis
+aioredis

@@ -30,7 +30,7 @@ async def generate_sd_prompt(random_event: str):
 async def make_request(prompt, endpoint):
     async with httpx.AsyncClient(timeout=timeout) as client:
         logger.info(f"Making request to {endpoint}")
-        request = {"query": prompt}
+        request = {"query": prompt, "session_id": "24"}
         response = await client.post(
             f"http://ai_driver:28001/api/v1/image/{endpoint}",
             json=request,

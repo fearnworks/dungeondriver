@@ -4,6 +4,7 @@ serialization and deserialization.
 """
 
 from pydantic import BaseModel
+from typing import List
 
 
 class ChatBase(BaseModel):
@@ -13,8 +14,24 @@ class ChatBase(BaseModel):
 
     query: str
     result: str
+    session_id: str
     # sources: Optional[str] = None
 
 
 class ChatRequest(BaseModel):
     query: str
+    session_id: str
+
+
+class ChatPair(BaseModel):
+    human: str
+    ai: str
+
+
+class ChatHistory(BaseModel):
+    history: List[ChatPair]
+    session_id: str
+
+
+class ChatHistoryRequest(BaseModel):
+    session_id: str

@@ -1,6 +1,11 @@
 version: "3"
 
 services:
+  ai_driver_redis:
+    image: redis:alpine
+    networks:
+      - dd-network
+
   ai_driver: # ai_driver:28001
     build:
       context: ./ai_driver
@@ -25,6 +30,8 @@ services:
       - .env
     networks:
       - dd-network
+    depends_on:
+      - ai_driver_redis
   dungeon_driver:
     build:
       context: ./dungeon_driver

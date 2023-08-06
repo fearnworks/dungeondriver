@@ -1,6 +1,5 @@
 """
-This module defines API endpoints related to characters such as fetching, creating, updating,
-searching characters and fetching character ideas from Reddit.
+This module defines API endpoints related to image generation
 """
 
 import asyncio
@@ -26,6 +25,7 @@ def sd_prompt_endpoint(
     sd_agent = get_default_sd_agent()
     query = request.query
     prompt = sd_agent.get_completion(query)
+    logger.info(prompt)
     eval_resp = sd_agent.rate(prompt["result"])
     logger.info(eval_resp)
     evaluations = schemas.SDEvaluations.parse_obj(eval_resp)

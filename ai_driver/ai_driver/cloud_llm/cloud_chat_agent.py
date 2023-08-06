@@ -4,9 +4,9 @@ from loguru import logger
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
-
+from typing import List
 from ai_driver.langsmith_config import get_client
-from ai_driver.config import server_config
+from ai_driver.server.schemas.chat import ChatPair, ChatHistory
 
 
 @dataclass
@@ -18,16 +18,21 @@ class CloudChatConfig:
 
 
 class CloudChatAgent:
-    def __init__(self, config: CloudChatConfig = CloudChatConfig()):
+    def __init__(
+        self, history: List[ChatPair], config: CloudChatConfig = CloudChatConfig()
+    ):
         self.llm: ChatOpenAI = ChatOpenAI(
             client=get_client(),
             temperature=config.temperature,
             model=config.model,
         )
+        self.history = history
+        self.memory = ConversationBufferMemory(return_messages=True)
+        for turn in self.history:
+            self.memory.save_context({"input": turn.human}, {"output": turn.ai})
+        logger.info(self.memory.load_memory_variables({}))
 
-        self.chat = self.llm  # backwards compat
-        self.memory = ConversationBufferMemory()
-        self.conversation = ConversationChain(
+        self.chat = ConversationChain(
             llm=self.llm, memory=self.memory, verbose=config.verbose
         )
         self.temperature = config.temperature
@@ -36,7 +41,6 @@ class CloudChatAgent:
 
     def get_completion(self, prompt):
         logger.info(f"Prompt: {prompt}")
-        messages = [{"role": "user", "content": prompt}]
-        response = self.chat.predict(prompt)
+        response = self.chat.predict(input=prompt)
         logger.info(f"Response: {response}")
         return {"query": prompt, "result": response}
