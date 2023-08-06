@@ -19,6 +19,7 @@ Are you ready to revolutionize your role as a Dungeon Master? Gather your party,
 - Local Inference (GPU & CPU)
 - Game Manual Q&A
 - RPG Focused Stable Diffusion Prompt Generation
+- LLM Chat with Session History
 
 ### Roadmap
 - Dynamic Campaign Creation: Utilize our intelligent assistant to generate and manage intricate and immersive campaigns tailored to your party's preferences.
@@ -41,6 +42,7 @@ AI Driver Technologies :
 - Agents : Langchain/Langsmith
 - Vectorstores : FAISS, Pinecone
 - CPU Inference : Ctransformers (GGML)
+- Cache: Redis
 
 DungeonDriver Technologies :
 - UI : Gradio
