@@ -23,7 +23,7 @@ async def make_request(prompt, endpoint):
         logger.info(f"Making request to {endpoint} with query {prompt}")
         request = {"query": prompt}
         response = await client.post(
-            f"http://ai_driver:28001/api/v1/chat/{endpoint}",
+            f"http://ai_driver:28001/api/v1/retrieval/{endpoint}",
             json=request,
         )
         logger.debug(response.text)

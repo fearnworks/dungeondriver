@@ -21,6 +21,9 @@ def init_interface():
         with gr.Tab("D&D Q&A"):
             interface["dnd_qa"] = UIComponents.dnd_qa_tab.create_dnd_qa()
             interface["dnd_qa"]
+        with gr.Tab("Chatbot"):
+            interface["chat"] = UIComponents.chat_tab.create_chat_interface()
+            interface["chat"]
 
     ui.queue()
 

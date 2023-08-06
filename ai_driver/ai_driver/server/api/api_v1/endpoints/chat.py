@@ -19,37 +19,6 @@ from ai_driver.retrieval.qa_config import get_default_qa_config
 router = APIRouter()
 
 
-@router.get("/local_download_pipline")
-def local_endpoint(
-    db: Session = Depends(deps.get_db),
-):
-    local_download_pipeline(
-        dir_path=server_config.DATA_PATH, embed_model=server_config.INSTRUCT_EMBED_MODEL
-    )
-
-
-@router.post("/pinecone", status_code=200, response_model=schemas.ChatBase)
-def pinecone_endpoint(request: schemas.ChatRequest, db: Session = Depends(deps.get_db)):
-    response = pinecone_qa_pipeline(request.query)
-    result = schemas.ChatBase(query=request.query, result=response)
-    logger.info(result)
-    return result
-
-
-@router.post("/local_llm", status_code=200, response_model=schemas.ChatBase)
-def local_llm_endpoint(
-    request: schemas.ChatRequest, db: Session = Depends(deps.get_db)
-):
-    qa_config = get_default_qa_config()
-    ggml_config = get_default_ggml_config()
-    response = local_llm_qa_pipeline(
-        request.query, device="cuda", qa_config=qa_config, ggml_config=ggml_config
-    )
-    result = schemas.ChatBase(query=request.query, result=response)
-    logger.info(result)
-    return result
-
-
 @router.post("/cloudllm", status_code=200, response_model=schemas.ChatBase)
 def cloud_llm_endpoint(
     request: schemas.ChatRequest, db: Session = Depends(deps.get_db)
