@@ -3,12 +3,16 @@ import httpx
 from loguru import logger
 from pathlib import Path
 import secrets
+from dungeon_driver.webui.auth import auth_service
 
 timeout = httpx.Timeout(600.0)
 
 
 async def make_request(prompt, session_id, endpoint):
     async with httpx.AsyncClient(timeout=timeout) as client:
+        # Call add_auth_headers to include the authentication token in the headers
+        client = auth_service.add_auth_headers(client)
+
         logger.info(f"Making request to {endpoint} with query {prompt}")
         request = {"query": prompt, "session_id": session_id}
         response = await client.post(

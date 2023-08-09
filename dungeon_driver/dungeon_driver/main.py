@@ -13,6 +13,9 @@ def init_interface():
     title = "Dungeon Driver AI Web Ui"
     interface = {}
     with gr.Blocks(analytics_enabled=False, title=title) as ui:
+        with gr.Tab("Authentication"):
+            interface["login"] = UIComponents.login.create_login_interface()
+            interface["login"]
         with gr.Tab("Spell Surge Generator"):
             interface[
                 "ssg"

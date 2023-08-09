@@ -9,6 +9,7 @@ from ai_driver.cloud_llm.cloud_chat_agent import CloudChatAgent
 from ai_driver.local_llm.ggml_pipeline import local_llm_qa_pipeline
 from ai_driver.server import crud, schemas
 from ai_driver.server.api import deps
+from ai_driver.server.schemas import User
 from ai_driver.local_loader import local_download_pipeline
 from ai_driver.cloud_llm.cloud_qa import pinecone_qa_pipeline
 from ai_driver.config import server_config
@@ -20,7 +21,7 @@ router = APIRouter()
 
 @router.get("/local_download_pipline")
 def local_endpoint(
-    db: Session = Depends(deps.get_db),
+    db: Session = Depends(deps.get_db), user: User = Depends(deps.get_current_user)
 ):
     local_download_pipeline(
         dir_path=server_config.DATA_PATH, embed_model=server_config.INSTRUCT_EMBED_MODEL
@@ -28,7 +29,9 @@ def local_endpoint(
 
 
 @router.post("/pinecone", status_code=200, response_model=schemas.QABase)
-def pinecone_endpoint(request: schemas.QARequest, db: Session = Depends(deps.get_db)):
+def pinecone_endpoint(
+    request: schemas.QARequest, user: User = Depends(deps.get_current_user)
+):
     response = pinecone_qa_pipeline(request.query)
     result = schemas.QABase(query=request.query, result=response)
     logger.info(result)
@@ -36,7 +39,9 @@ def pinecone_endpoint(request: schemas.QARequest, db: Session = Depends(deps.get
 
 
 @router.post("/local_llm", status_code=200, response_model=schemas.QABase)
-def local_llm_endpoint(request: schemas.QARequest, db: Session = Depends(deps.get_db)):
+def local_llm_endpoint(
+    request: schemas.QARequest, user: User = Depends(deps.get_current_user)
+):
     qa_config = get_default_qa_config()
     ggml_config = get_default_ggml_config()
     response = local_llm_qa_pipeline(

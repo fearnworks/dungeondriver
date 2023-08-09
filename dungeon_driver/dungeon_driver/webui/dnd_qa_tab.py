@@ -1,6 +1,7 @@
 import gradio as gr
 import httpx
 from loguru import logger
+from dungeon_driver.webui.auth import auth_service
 
 timeout = httpx.Timeout(600.0)
 
@@ -20,6 +21,7 @@ async def endpoint_test(prompt: str):
 
 async def make_request(prompt, endpoint):
     async with httpx.AsyncClient(timeout=timeout) as client:
+        client = auth_service.add_auth_headers(client)
         logger.info(f"Making request to {endpoint} with query {prompt}")
         request = {"query": prompt}
         response = await client.post(

@@ -4,7 +4,7 @@ and user signup in a FastAPI application.
 
 TODO - Consider enhanced error handling and validation
 """
-
+from loguru import logger
 from typing import Any
 
 import ai_driver.server.api.deps as deps
@@ -36,7 +36,7 @@ def login(
     Returns:
         dict: A dictionary containing the access token and token type.
     """
-
+    logger.info(form_data)
     user = authenticate(email=form_data.username, password=form_data.password, db=db)
     if not user:
         raise HTTPException(status_code=400, detail="Incorrect username or password")

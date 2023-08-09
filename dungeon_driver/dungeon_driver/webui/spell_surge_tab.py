@@ -4,6 +4,7 @@ from dungeon_driver.prompts.img_gen import OPENAI_RPG_SD_AGENT_PROMPT
 import gradio as gr
 import httpx
 from loguru import logger
+from dungeon_driver.webui.auth import auth_service
 
 timeout = httpx.Timeout(600.0)
 
@@ -29,6 +30,7 @@ async def generate_sd_prompt(random_event: str):
 
 async def make_request(prompt, endpoint):
     async with httpx.AsyncClient(timeout=timeout) as client:
+        client = auth_service.add_auth_headers(client)
         logger.info(f"Making request to {endpoint}")
         request = {"query": prompt, "session_id": "24"}
         response = await client.post(
