@@ -1,17 +1,17 @@
 #!/bin/bash
 
-# Compile requirements for dungeon_driver
+# Compile requirements/requirements for dungeon_driver
 cd ./dungeon_driver
-pip-compile requirements.in
-pip-compile requirements-dev.in
-pip-compile requirements-test.in
+pip-compile requirements/requirements.in
+pip-compile requirements/requirements-dev.in
+pip-compile requirements/requirements-test.in
 cd ..
 
-# Compile requirements for ai_driver
+# Compile requirements/requirements for ai_driver
 cd ./ai_driver
-pip-compile requirements.in
-pip-compile requirements-server.in
-pip-compile requirements-dev.in
-pip-compile requirements-test.in
+pip-compile requirements/requirements.in
+pip-compile requirements/requirements-server.in
+pip-compile requirements/requirements-dev.in
+pip-compile requirements/requirements-test.in
 echo "Pin update complete."
 cd ..

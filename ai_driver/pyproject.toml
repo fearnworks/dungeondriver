@@ -14,10 +14,10 @@ dynamic = ["dependencies", "optional-dependencies"]
 
 
 [tool.setuptools.dynamic]
-dependencies = { file = ["requirements.in"] }
-optional-dependencies.test = { file = ["requirements-test.in"] }
-optional-dependencies.server = { file = ["requirements-server.in"] }
-optional-dependencies.dev = { file = ["requirements-dev.in"]}
+dependencies = { file = ["requirements/requirements.in"] }
+optional-dependencies.test = { file = ["requirements/requirements-test.in"] }
+optional-dependencies.server = { file = ["requirements/requirements-server.in"] }
+optional-dependencies.dev = { file = ["requirements/requirements-dev.in"]}
 
 [tool.pytest.ini_options]
 pythonpath = [

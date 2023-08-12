@@ -30,7 +30,7 @@ sudo docker network create dd-network # handle for folks who don't have docker g
 
 python3.10 -m venv .server_venv && source .server_venv/bin/activate
 python3.10 -m pip install --upgrade pip
-python3.10 -m pip install -r ./ai_driver/requirements.txt
+python3.10 -m pip install -r ./ai_driver/requirements/requirements.txt
 
 if [ "$DOWNLOAD_MODEL" = true ]; then
   python3.10 ./ai_driver/ai_driver/scripts/download_model.py

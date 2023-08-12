@@ -17,8 +17,8 @@ RUN groupadd -r appuser && useradd --no-log-init -r -g appuser appuser
 RUN mkdir /app && \
     mkdir -p /home/appuser/.cache && \
     chown -R appuser:appuser /app /home/appuser
-COPY ./requirements.txt /app/requirements.txt
-COPY ./requirements-server.txt /app/requirements-server.txt
+COPY ./requirements/requirements.txt /app/requirements.txt
+COPY ./requirements/requirements-server.txt /app/requirements-server.txt
 RUN --mount=type=cache,target=~/.cache/pip \
     pip install -r /app/requirements.txt && \
     pip install -r /app/requirements-server.txt

@@ -31,6 +31,12 @@ class ChatPair(BaseModel):
 class ChatHistory(BaseModel):
     history: List[ChatPair]
     session_id: str
+    user_id: str
+
+
+class ChatSession(BaseModel):
+    session_id: str
+    user_id: str
 
 
 class ChatHistoryRequest(BaseModel):

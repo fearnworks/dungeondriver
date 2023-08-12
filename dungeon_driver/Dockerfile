@@ -18,7 +18,7 @@ RUN mkdir /app && \
     mkdir -p /home/appuser/.cache && \
     chown -R appuser:appuser /app /home/appuser
 
-COPY ./requirements.txt /app/requirements.txt
+COPY ./requirements/requirements.txt /app/requirements.txt
 # Set environment variables
 RUN --mount=type=cache,target=~/.cache/pip \
     pip install -r /app/requirements.txt
