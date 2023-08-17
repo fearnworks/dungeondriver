@@ -6,14 +6,14 @@ def to_snake_case(name: str) -> str:
 
 
 class SDEvaluation(BaseModel):
-    score: int
+    score: float
     justification: str
 
 
 class SDEvaluations(BaseModel):
     class Config:
         alias_generator = to_snake_case
-        allow_population_by_field_name = True
+        populate_by_name = True
 
     subject_appropriateness: SDEvaluation = Field(..., alias="Subject Appropriateness")
     detail_quality: SDEvaluation = Field(..., alias="Detail Quality")

@@ -12,7 +12,8 @@ TODO:
 
 from typing import Optional
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
+import uuid
 
 
 class UserBase(BaseModel):
@@ -20,10 +21,11 @@ class UserBase(BaseModel):
     A base model for user that includes the common attributes.
     """
 
-    first_name: Optional[str]
-    surname: Optional[str]
+    first_name: str | None
+    surname: str | None
     email: Optional[EmailStr] = None
     is_superuser: bool = False
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
 
 
 class UserCreate(UserBase):
@@ -48,10 +50,10 @@ class UserInDBBase(UserBase):
     A base model for users stored in the database. It includes the id attribute.
     """
 
-    id: Optional[int] = None
+    id: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class UserInDB(UserInDBBase):

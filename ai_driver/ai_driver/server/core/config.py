@@ -9,7 +9,8 @@ import sys
 
 from dotenv import load_dotenv, find_dotenv
 from ai_driver.server.core.logging import InterceptHandler
-from pydantic import AnyHttpUrl, BaseSettings, EmailStr, Field, validator
+from pydantic import AnyHttpUrl, EmailStr, Field, validator
+from pydantic_settings import BaseSettings
 from typing import List, Optional, Union
 
 # Load environment variables from .env file
@@ -50,7 +51,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
 
     # List of origins for CORS (Cross-Origin Resource Sharing)
-    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
+    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = ["http://localhost:3000"]
 
     # Origins that match this regex OR are in the above list are allowed
     BACKEND_CORS_ORIGIN_REGEX: Optional[str]

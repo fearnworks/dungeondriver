@@ -23,7 +23,7 @@ def cloud_llm_endpoint(
     # Fetch chat history from Redis
     logger.info(request)
     try:
-        chat_history = crud_sessions.get_history(request.session_id, user.id)
+        chat_history = crud_sessions.get_history(request.session_id, user.email)
     except Exception as err:
         logger.error(f"Error fetching chat history: {err}", exc_info=True)
         raise Exception("Error fetching chat history")
@@ -59,13 +59,13 @@ def get_chat_history(
     user: schemas.User = Depends(deps.get_current_user),
 ):
     # Fetch chat history from Redis using the session_id
-    chat_history = crud_sessions.get_history(request.session_id, user.id)
+    chat_history = crud_sessions.get_history(request.session_id, user.email)
     logger.info(chat_history)
     return chat_history
 
 
 @router.post("/sessions", status_code=200)
 def get_chat_sessions(user: schemas.User = Depends(deps.get_current_user)):
-    sessions = crud_sessions.get_sessions(user.id)
-    logger.info(f"Got session list for user {user.id} : {sessions}")
+    sessions = crud_sessions.get_sessions(user.email)
+    logger.info(f"Got session list for user {user.email} : {sessions}")
     return sessions
