@@ -3,10 +3,9 @@ This module defines API endpoints related to chat such as fetching, creating, an
 """
 from loguru import logger
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
 
 from ai_driver.cloud_llm.cloud_chat_agent import CloudChatAgent
-from ai_driver.server import crud, schemas
+from ai_driver.server import schemas
 from ai_driver.server.crud import sessions as crud_sessions
 from ai_driver.server.api import deps
 from ai_driver.config import server_config

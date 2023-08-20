@@ -2,8 +2,7 @@ import timeit
 from loguru import logger
 from langchain import PromptTemplate
 from langchain.chains import RetrievalQA
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import FAISS
+import ai_driver.vector_storage.faiss_manager as FAISSManager
 from ai_driver.local_llm.prompts import qa_template
 from ai_driver.local_llm.ggml_llm import build_ggml_llm, GGMLConfig
 from ai_driver.retrieval.qa import QADBConfig, qa_pipeline
@@ -37,10 +36,10 @@ def local_llm_qa_pipeline(
 
     # Setup DBQA
     start = timeit.default_timer()
-    embeddings = HuggingFaceEmbeddings(
-        model_name=qa_config.embed_model, model_kwargs={"device": device}
+    embeddings = FAISSManager.get_cache_embeddings(
+        qa_config.embed_model, {"device": "cuda"}
     )
-    vectordb = FAISS.load_local(qa_config.db_path, embeddings)
+    vectordb = FAISSManager.get_vector_store(embeddings)
     retriever = vectordb.as_retriever(search_kwargs={"k": qa_config.vector_count})
     model = build_ggml_llm(ggml_config)
     response = qa_pipeline(query, retriever, model)

@@ -5,12 +5,11 @@ from loguru import logger
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from ai_driver.cloud_llm.cloud_chat_agent import CloudChatAgent
 from ai_driver.local_llm.ggml_pipeline import local_llm_qa_pipeline
-from ai_driver.server import crud, schemas
+from ai_driver.server import schemas
 from ai_driver.server.api import deps
 from ai_driver.server.schemas import User
-from ai_driver.local_loader import local_download_pipeline
+from ai_driver.vector_storage.local_download_pipeline import local_download_pipeline
 from ai_driver.cloud_llm.cloud_qa import pinecone_qa_pipeline
 from ai_driver.config import server_config
 from ai_driver.local_llm.ggml_config import get_default_ggml_config

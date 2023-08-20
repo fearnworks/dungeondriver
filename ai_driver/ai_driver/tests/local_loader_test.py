@@ -1,4 +1,4 @@
-from ai_driver.local_loader import load, split
+from ai_driver.vector_storage.local_loader import load, split
 import pytest
 import os
 import shutil

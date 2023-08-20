@@ -2,13 +2,11 @@
 This module defines API endpoints related to image generation
 """
 
-import asyncio
-from typing import Any, Optional
+
 from loguru import logger
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from ai_driver.cloud_llm.cloud_chat_agent import CloudChatAgent
 from ai_driver.image_generation.prompt_generation.sd_prompt_agent import (
     get_default_sd_agent,
 )
