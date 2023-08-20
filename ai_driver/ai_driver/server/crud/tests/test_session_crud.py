@@ -33,8 +33,10 @@ def test_get_history_existing_session(redisdb: Redis):
 def test_get_history_deserialization_error(redisdb: Redis):
     session_id = "existing_session_id"
     user_id = "user_id"
-    redisdb.lpush(f"session_list:{user_id}", session_id)
-    redisdb.set(session_id, "invalid_jsoddn1")
+    # Add the session_id to the sorted set so that get_sessions can find it
+    redisdb.zadd(f"session_list:{user_id}", {session_id: 1})
+    # Add the invalid JSON string to the chat history list
+    redisdb.lpush(f"chathistory:{session_id}", "invalid_jsoddn1")
 
     with pytest.raises(Exception, match="Error deserializing chat history"):
         get_history(session_id, user_id, store=redisdb)
@@ -42,10 +44,9 @@ def test_get_history_deserialization_error(redisdb: Redis):
 
 def test_should_get_session(redisdb: Redis):
     user_id = "2"
-    pipe = redisdb.pipeline()
-    for val in ["existing_session_id", "existing_session_id2"]:
-        pipe.lpush(f"session_list:{user_id}", val)
-        pipe.execute()
+    for val, score in [("existing_session_id", 1), ("existing_session_id2", 2)]:
+        redisdb.zadd(f"session_list:{user_id}", {val: score})
     result = get_sessions(user_id, store=redisdb)
     logger.info(result)
-    assert result == ["existing_session_id2", "existing_session_id"]
+    # The order of the elements in the result will be based on the scores
+    assert result == ["existing_session_id", "existing_session_id2"]
