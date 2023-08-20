@@ -1,5 +1,4 @@
 from ai_driver.server.crud.sessions import get_history, get_sessions
-from ai_driver.server import schemas
 from redis.client import Redis
 import pytest
 from loguru import logger

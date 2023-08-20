@@ -2,12 +2,8 @@
 This module defines API endpoints related to chat such as fetching, creating, and updating chat sessions
 """
 from loguru import logger
-from fastapi import APIRouter, Depends
 
-from ai_driver.cloud_llm.cloud_chat_agent import CloudChatAgent
-from ai_driver.server import crud, schemas
-from ai_driver.server.api import deps
-from ai_driver.config import server_config
+from ai_driver.server import schemas
 from ai_driver.server.redis import redis_client
 from typing import List
 import time
