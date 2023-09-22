@@ -11,7 +11,7 @@ async def endpoint_test(prompt: str):
     response = await make_request(prompt, "pinecone")
     response2 = await make_request(prompt, "local_llm")
     logger.info(response)
-    logger.info(response2)
+    # logger.info(response2)
     if response.status_code == 200:
         print("Server is up and running!")
     else:

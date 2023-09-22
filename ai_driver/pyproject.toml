@@ -17,6 +17,7 @@ dynamic = ["dependencies", "optional-dependencies"]
 dependencies = { file = ["requirements/requirements.in"] }
 optional-dependencies.test = { file = ["requirements/requirements-test.in"] }
 optional-dependencies.server = { file = ["requirements/requirements-server.in"] }
+optional-dependencies.ui = { file = ["requirements/requirements-ui.in"] }
 optional-dependencies.dev = { file = ["requirements/requirements-dev.in"]}
 
 [tool.pytest.ini_options]

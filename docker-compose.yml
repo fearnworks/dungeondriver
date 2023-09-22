@@ -38,6 +38,22 @@ services:
       - dd-network
     depends_on:
       - ai_driver_redis
+  webui:
+    build:
+      context: ./ai_driver
+      dockerfile: webui/Dockerfile
+    container_name: dungeon_driver
+    ports:
+      - 18000:18000
+    volumes:
+      - ./ai_driver/webui:/code
+    env_file:
+      - .env
+    networks:
+      - dd-network
+    depends_on:
+      - ai_driver
+
   dungeon_driver:
     build:
       context: ./dungeon_driver
