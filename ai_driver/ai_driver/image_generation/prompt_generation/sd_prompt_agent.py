@@ -2,7 +2,10 @@ from langchain.prompts import ChatPromptTemplate
 from ai_driver.image_generation.prompt_generation.prompts import (
     SD_PROMPT_RATING_TEMPLATE,
 )
-from ai_driver.cloud_llm.cloud_chat_agent import CloudChatAgent, CloudChatConfig
+from ai_driver.cloud_llm.cloud_chat_agent import (
+    CloudChatAgent,
+    CloudChatGenerationConfig,
+)
 from ai_driver.image_generation.prompt_generation.prompt_rating import SDPromptRating
 from dataclasses import dataclass
 from typing import Any
@@ -14,7 +17,7 @@ from ai_driver.langsmith_config import get_client
 
 
 @dataclass
-class SDAgentConfig(CloudChatConfig):
+class SDAgentConfig(CloudChatGenerationConfig):
     temperature: float = 0.0
     sd_prompt_rating_template: str = SD_PROMPT_RATING_TEMPLATE
 
@@ -27,7 +30,7 @@ class SDPromptEvaluation:
 
 
 class CloudSDAgent:
-    def __init__(self, config: CloudChatConfig = SDAgentConfig()):
+    def __init__(self, config: CloudChatGenerationConfig = SDAgentConfig()):
         self.llm: ChatOpenAI = ChatOpenAI(
             client=get_client(),
             temperature=config.temperature,

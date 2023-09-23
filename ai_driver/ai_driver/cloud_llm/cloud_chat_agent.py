@@ -2,24 +2,36 @@ from typing import Type
 from dataclasses import dataclass
 from loguru import logger
 from langchain.chat_models import ChatOpenAI
+
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
 from typing import List
 from ai_driver.langsmith_config import get_client
 from ai_driver.server.schemas.chat import ChatPair, ChatHistory
+from ai_driver.cloud_llm.OAISettings import OAIModels
+from ai_driver.core.generation_config import (
+    LLMGenerationConfig,
+    ModelPlatforms,
+    LLMModelKind,
+)
+import json
 
 
 @dataclass
-class CloudChatConfig:
+class CloudChatGenerationConfig(LLMGenerationConfig):
     llm: Type[ChatOpenAI] = ChatOpenAI
-    temperature: float = 0.0
-    model: str = "gpt-3.5-turbo-0613"
+    platform: ModelPlatforms = ModelPlatforms.cloud
+    kind: LLMModelKind = LLMModelKind.chat
+    model: str = OAIModels.GPT3_5_Turbo
+    max_new_tokens: int = 8000
     verbose: bool = False
 
 
 class CloudChatAgent:
     def __init__(
-        self, history: List[ChatPair], config: CloudChatConfig = CloudChatConfig()
+        self,
+        history: List[ChatPair],
+        config: CloudChatGenerationConfig = CloudChatGenerationConfig(),
     ):
         self.llm: ChatOpenAI = ChatOpenAI(
             client=get_client(),

@@ -18,15 +18,17 @@ RUN mkdir /app && \
     mkdir -p /home/appuser/.cache && \
     chown -R appuser:appuser /app /home/appuser
 
-COPY ./requirements/requirements.txt /app/requirements.txt
+COPY ./requirements/requirements-ui.in /app/requirements.txt
 # Set environment variables
 RUN --mount=type=cache,target=~/.cache/pip \
-    pip install -r /app/requirements.txt &\
-    pip install gradio loguru python-dotenv
+    pip install -r /app/requirements.txt
 # Download public link share
 RUN curl -o frpc_linux_amd64_v0.2 https://cdn-media.huggingface.co/frpc-gradio-0.2/frpc_linux_amd64 && \
     mv frpc_linux_amd64_v0.2 /usr/local/lib/python3.11/site-packages/gradio
 # Set working directory to /app
+COPY .  /aidriver/
+RUN --mount=type=cache,target=~/.cache/pip \
+    pip install -e /aidriver
 WORKDIR /app
 
 COPY --chown=appuser:appuser  . /app/webui
