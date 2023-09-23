@@ -7,18 +7,21 @@ from dotenv import load_dotenv, find_dotenv
 from auth import auth_service
 from swarm_chat import create_swarm_chat_interface
 from chat import create_chat_interface
+from qa import create_qa
 
 load_dotenv(find_dotenv())
 
 
 def init_interface():
-    title = "Dungeon Driver AI Web Ui"
+    title = "AI Driver Demo UI"
     interface = {}
     with gr.Blocks(analytics_enabled=False, title=title) as ui:
         with gr.Tab("Chat"):
             interface["chat"] = create_chat_interface()
         with gr.Tab("Swarm"):
             interface["swarm_chat"] = create_swarm_chat_interface()
+        with gr.Tab("QA"):
+            interface["qa"] = create_qa()
     ui.queue()
 
     ui.launch(

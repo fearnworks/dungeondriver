@@ -1,13 +1,12 @@
 import gradio as gr
 import httpx
 from loguru import logger
-from dungeon_driver.webui.auth import auth_service
-import asyncio
+from auth import auth_service
 
 timeout = httpx.Timeout(600.0)
+import asyncio
 
 
-##########################
 async def endpoint_test(prompt: str):
     task1 = asyncio.create_task(make_request(prompt, "pinecone"))
     task2 = asyncio.create_task(make_request(prompt, "local_llm"))
@@ -43,7 +42,7 @@ async def make_request(prompt, endpoint):
         return response
 
 
-def create_dnd_qa() -> gr.Blocks:
+def create_qa() -> gr.Blocks:
     with gr.Blocks() as question_tab:
         with gr.Row():
             with gr.Column():
