@@ -21,6 +21,9 @@ class ChatBase(BaseModel):
 class ChatRequest(BaseModel):
     query: str
     session_id: str
+    model: str
+    temperature: float
+    max_tokens: int
 
 
 class ChatPair(BaseModel):

@@ -4,7 +4,10 @@ This module defines API endpoints related to chat such as fetching, creating, an
 from loguru import logger
 from fastapi import APIRouter, Depends
 
-from ai_driver.cloud_llm.cloud_chat_agent import CloudChatAgent
+from ai_driver.cloud_llm.cloud_chat_agent import (
+    CloudChatAgent,
+    CloudChatGenerationConfig,
+)
 from ai_driver.server import schemas
 from ai_driver.server.crud import sessions as crud_sessions
 from ai_driver.server.api import deps
@@ -21,6 +24,9 @@ def cloud_llm_endpoint(
 ):
     # Fetch chat history from Redis
     logger.info(request)
+    config = CloudChatGenerationConfig(
+        max_new_tokens=request.max_tokens, temperature=request.temperature
+    )
     try:
         chat_history = crud_sessions.get_history(request.session_id, user.email)
     except Exception as err:
@@ -28,7 +34,9 @@ def cloud_llm_endpoint(
         raise Exception("Error fetching chat history")
 
     logger.info(chat_history)
-    agent = CloudChatAgent(history=[pair for pair in chat_history.history])
+    agent = CloudChatAgent(
+        history=[pair for pair in chat_history.history], config=config
+    )
     response = agent.get_completion(request.query)
     result = response["result"]
 

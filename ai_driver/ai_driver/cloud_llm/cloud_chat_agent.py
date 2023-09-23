@@ -31,11 +31,12 @@ class CloudChatAgent:
     def __init__(
         self,
         history: List[ChatPair],
-        config: CloudChatGenerationConfig = CloudChatGenerationConfig(),
+        config: CloudChatGenerationConfig,
     ):
         self.llm: ChatOpenAI = ChatOpenAI(
             client=get_client(),
             temperature=config.temperature,
+            max_tokens=config.max_new_tokens,
             model=config.model,
         )
         self.history = history

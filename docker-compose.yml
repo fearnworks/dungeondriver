@@ -42,7 +42,7 @@ services:
     build:
       context: ./ai_driver
       dockerfile: webui/Dockerfile
-    container_name: dungeon_driver
+    container_name: ai_driver_webui
     ports:
       - 18000:18000
     volumes:
