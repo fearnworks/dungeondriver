@@ -9,7 +9,7 @@ asttokens==2.2.1
 backcall==0.2.0
     # via ipython
 black==23.7.0
-    # via -r requirements/requirements-dev.in
+    # via -r requirements-dev.in
 build==0.10.0
     # via pip-tools
 certifi==2023.7.22
@@ -39,7 +39,7 @@ identify==2.5.26
 idna==3.4
     # via requests
 ipykernel==6.25.1
-    # via -r requirements/requirements-dev.in
+    # via -r requirements-dev.in
 ipython==8.14.0
     # via ipykernel
 jedi==0.19.0
@@ -51,13 +51,13 @@ jupyter-core==5.3.1
     #   ipykernel
     #   jupyter-client
 loguru==0.7.0
-    # via -r requirements/requirements-dev.in
+    # via -r requirements-dev.in
 matplotlib-inline==0.1.6
     # via
     #   ipykernel
     #   ipython
 mypy==1.5.1
-    # via -r requirements/requirements-dev.in
+    # via -r requirements-dev.in
 mypy-extensions==1.0.0
     # via
     #   black
@@ -80,14 +80,14 @@ pexpect==4.8.0
 pickleshare==0.7.5
     # via ipython
 pip-tools==7.3.0
-    # via -r requirements/requirements-dev.in
+    # via -r requirements-dev.in
 platformdirs==3.10.0
     # via
     #   black
     #   jupyter-core
     #   virtualenv
 pre-commit==3.3.3
-    # via -r requirements/requirements-dev.in
+    # via -r requirements-dev.in
 prompt-toolkit==3.0.39
     # via ipython
 psutil==5.9.5
@@ -103,7 +103,7 @@ pyproject-hooks==1.0.0
 python-dateutil==2.8.2
     # via jupyter-client
 python-dotenv==1.0.0
-    # via -r requirements/requirements-dev.in
+    # via -r requirements-dev.in
 pyyaml==6.0.1
     # via pre-commit
 pyzmq==25.1.1
@@ -111,7 +111,7 @@ pyzmq==25.1.1
     #   ipykernel
     #   jupyter-client
 requests==2.31.0
-    # via -r requirements/requirements-dev.in
+    # via -r requirements-dev.in
 six==1.16.0
     # via
     #   asttokens
@@ -119,14 +119,7 @@ six==1.16.0
 stack-data==0.6.2
     # via ipython
 tdqm==0.0.1
-    # via -r requirements/requirements-dev.in
-tomli==2.0.1
-    # via
-    #   black
-    #   build
-    #   mypy
-    #   pip-tools
-    #   pyproject-hooks
+    # via -r requirements-dev.in
 tornado==6.3.3
     # via
     #   ipykernel
@@ -143,7 +136,7 @@ traitlets==5.9.0
     #   matplotlib-inline
 typing-extensions==4.7.1
     # via mypy
-urllib3==2.0.4
+urllib3==2.0.6
     # via requests
 virtualenv==20.24.3
     # via pre-commit
