@@ -16,13 +16,11 @@ annotated-types==0.5.0
     # via pydantic
 anyio==3.7.1
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   httpcore
     #   starlette
 async-timeout==4.0.3
-    # via
-    #   aiohttp
-    #   langchain
+    # via aiohttp
 attrs==23.1.0
     # via
     #   aiohttp
@@ -43,23 +41,21 @@ click==8.1.7
 cmake==3.27.2
     # via triton
 ctransformers==0.2.22
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 dataclasses-json==0.5.14
     # via langchain
 datasets==2.14.4
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 dill==0.3.7
     # via
     #   datasets
     #   multiprocess
 dnspython==2.4.2
     # via pinecone-client
-exceptiongroup==1.1.3
-    # via anyio
 faiss-cpu==1.7.4
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 fastapi==0.101.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 filelock==3.12.2
     # via
     #   huggingface-hub
@@ -91,7 +87,7 @@ h11==0.14.0
 httpcore==0.17.3
     # via httpx
 httpx==0.24.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 huggingface-hub==0.16.4
     # via
     #   ctransformers
@@ -105,7 +101,7 @@ idna==3.4
     #   requests
     #   yarl
 instructorembedding==1.0.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 jinja2==3.1.2
     # via torch
 joblib==1.3.2
@@ -113,18 +109,18 @@ joblib==1.3.2
     #   nltk
     #   scikit-learn
 jsonlines==3.1.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 langchain==0.0.268
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 langsmith==0.0.25
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   langchain
 lit==16.0.6
     # via triton
 loguru==0.7.0
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   pinecone-client
 lz4==4.3.2
     # via pinecone-client
@@ -154,7 +150,7 @@ numexpr==2.8.5
     # via langchain
 numpy==1.25.2
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   datasets
     #   langchain
     #   numexpr
@@ -192,7 +188,7 @@ nvidia-nccl-cu11==2.14.3
 nvidia-nvtx-cu11==11.7.91
     # via torch
 openai==0.27.8
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 packaging==23.1
     # via
     #   datasets
@@ -201,12 +197,12 @@ packaging==23.1
     #   transformers
 pandas==2.0.3
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   datasets
 pillow==10.0.0
     # via torchvision
 pinecone-client[grpc]==2.2.2
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 protobuf==3.19.6
     # via
     #   googleapis-common-protos
@@ -215,7 +211,7 @@ py-cpuinfo==9.0.0
     # via ctransformers
 pyarrow==12.0.1
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   datasets
 pydantic==2.2.1
     # via
@@ -227,17 +223,17 @@ pydantic-core==2.6.1
 pygments==2.16.1
     # via rich
 pypdf==3.15.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 pypdf2==3.0.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 python-box==7.0.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 python-dateutil==2.8.2
     # via
     #   pandas
     #   pinecone-client
 python-dotenv==1.0.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 pytz==2023.3
     # via pandas
 pyyaml==6.0.1
@@ -254,7 +250,7 @@ regex==2023.8.8
     #   transformers
 requests==2.31.0
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   datasets
     #   fsspec
     #   huggingface-hub
@@ -266,20 +262,20 @@ requests==2.31.0
     #   torchvision
     #   transformers
 rich==13.5.2
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 safetensors==0.3.2
     # via transformers
 scikit-learn==1.3.0
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   sentence-transformers
 scipy==1.11.2
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   scikit-learn
     #   sentence-transformers
 sentence-transformers==2.2.2
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 sentencepiece==0.1.99
     # via sentence-transformers
 six==1.16.0
@@ -296,18 +292,18 @@ starlette==0.27.0
 sympy==1.12
     # via torch
 tdqm==0.0.1
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 tenacity==8.2.3
     # via langchain
 threadpoolctl==3.2.0
     # via scikit-learn
 tiktoken==0.4.0
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 tokenizers==0.13.3
     # via transformers
 torch==2.0.1
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   sentence-transformers
     #   torchvision
     #   triton
@@ -325,7 +321,7 @@ tqdm==4.66.1
     #   transformers
 transformers==4.31.0
     # via
-    #   -r requirements/requirements.in
+    #   -r requirements.in
     #   sentence-transformers
 triton==2.0.0
     # via torch
@@ -339,17 +335,16 @@ typing-extensions==4.7.1
     #   sqlalchemy
     #   torch
     #   typing-inspect
-    #   uvicorn
 typing-inspect==0.9.0
     # via dataclasses-json
 tzdata==2023.3
     # via pandas
-urllib3==2.0.4
+urllib3==2.0.7
     # via
     #   pinecone-client
     #   requests
 uvicorn==0.23.2
-    # via -r requirements/requirements.in
+    # via -r requirements.in
 wheel==0.41.1
     # via
     #   nvidia-cublas-cu11
